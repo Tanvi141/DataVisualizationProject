@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+    <head>    
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+        <title></title>
+        <script type="text/javascript" src="https://d3js.org/d3.v3.min.js"></script>
+        <script src="https://d3js.org/topojson.v1.min.js"></script>
+        <style>
+           #tooltip {
+                position: absolute;
+                width: 200px;
+                height: auto;
+                padding: 10px;
+                background-color: white;
+                -webkit-border-radius: 10px;
+                -moz-border-radius: 10px;
+                border-radius: 10px;
+                -webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+                -moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+                box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+                pointer-events: none;
+           }
+           #tooltip.hidden {
+                display: none;
+           }
+
+           #tooltip p {
+                margin: 0;
+                font-family: sans-serif;
+                font-size: 16px;
+                line-height: 20px;
+           }  
+        </style>
+    </head>
+    <body>
+         <div id="tooltip" class="hidden">
+             <p><span id="name">100</span></p>
+        </div>
+        <script type="text/javascript">
+    
+            var north = "rgba(0, 154, 202, 0.5)",
+                west = "khaki",
+                east = "rgba(204, 28, 28, 0.6)",
+                south = "darkseagreen",
+                islands = "rgba(128, 0, 128, 0.5)";
+
+            var colorMap = {
+                    "臺北市" : north, 
+                    "新北市" : north, 
+                    "桃園縣" : north,
+                    "新竹縣" : north,
+                    "新竹市" : north,
+                    "基隆市" : north,
+                    "宜蘭縣" : north,
+                    "苗栗縣" : west,
+                    "彰化縣" : west,
+                    "南投縣" : west,
+                    "雲林縣" : west,
+                    "臺中市" : west,
+                    "嘉義縣" : south,
+                    "嘉義市" : south,
+                    "屏東縣" : south, 
+                    "臺南市" : south,
+                    "高雄市" : south,
+                    "花蓮縣" : east,
+                    "臺東縣" : east,
+                    "澎湖縣" : islands,
+                    "金門縣" : islands,
+                    "連江縣" : islands
+            };
+
+            var width = 600,   
+                height = 520;
+            
+            var svg = d3.select("body")
+                  .append("svg")
+                  .attr("width", width)
+                  .attr("height", height)
+                  .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")"); 
+
+            d3.json("http://localhost:8000/taiwan.topo.json", function (data) {
+
+                topo = topojson.feature(data, data.objects["layer1"]);
+
+                prj = d3.geo.mercator().center([120.979531, 23.978567]).scale(8000);
+                path = d3.geo.path().projection(prj);
+
+                svg.selectAll("path")
+                   .data(topo.features)
+                   .enter()
+                   .append("path")
+                   .attr("d", path)
+                   .attr("fill", function(d) {
+                     return colorMap[d.properties.COUNTYNAME];    
+                     })
+                   .attr("stroke", "rgba(238, 238, 238, 0.5)")
+                   .on("mouseover", function(d) {
+                      d3.select(this).attr("fill", "orange");     
+                      var center = getCentroid(d3.select(this)); 
+                      d3.select("#tooltip")
+                      .style("left", center[0] + "px")
+                      .style("top", center[1] + "px")
+                      .select("#name")
+                      .text(d.properties.COUNTYNAME);
+                      d3.select("#tooltip").classed("hidden", false); 
+                    })
+                    .on("mouseout", function(d) {
+                        d3.select(this).attr("fill", colorMap[d.properties.COUNTYNAME]);
+                        d3.select("#tooltip").classed("hidden", true); 
+                    })
+                   .append("title")
+                   .text(function(d) {
+                     return d.properties.COUNTYNAME;
+                     });
+
+
+            });
+
+            function getCentroid(selection) {
+                // get the DOM element from a D3 selection
+                // you could also use "this" inside .each()
+                var element = selection.node(),
+                // use the native SVG interface to get the bounding box
+                bbox = element.getBBox();
+                 // return the center of the bounding box
+                return [bbox.x + bbox.width/2, bbox.y + bbox.height/2];
+             }
+        </script>
+  </body>
+</html>
