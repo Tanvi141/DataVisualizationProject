@@ -1,15 +1,17 @@
 
-d3.csv("2015_Air_quality_in_northern_Taiwan.csv", function (d) {
+d3.csv("http://localhost:8000/2015_Air_quality_in_northern_Taiwan.csv", function (d) {
     const separators=[':',' ','/']
     var rows=[];
     var attributes=['CO','NO2','NO','NOx','O3'];
     var places=['Banqiao','Cailiao','Datong','Dayuan','Guanyin','Guting','Keelung','Linkou','Longtan','Pingzhen','Sanchong','Shilin','Songshan','Tamsui','Taoyuan','Tucheng','Wanhua','Wanli','Xindian','Xinzhuang','Xizhi','Yangming','Yonghe','Zhongli' ];
     var last={}
-    
+    console.log(d.length)
+    console.log(places.length)
     for(var i=0;i<6;i++){
         var entry={}
         
         //parsing for the time
+        console.log(d[i])
         times=d[i].time.split(new RegExp(separators.join('|'), 'g'))
         entry_time={
             year: Number(times[0]),
@@ -23,8 +25,8 @@ d3.csv("2015_Air_quality_in_northern_Taiwan.csv", function (d) {
 
         //the values of all the attributes
         entry_attributes=[]
-        for(var i=0;i<attributes.length;i++){
-            at=attributes[i]
+        for(var j=0;j<attributes.length;j++){
+            at=attributes[j]
             if (d[i][at]==null){
                 entry_attributes.push(last[at])
             }

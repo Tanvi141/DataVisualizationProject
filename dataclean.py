@@ -1,3 +1,4 @@
+# CO, NO, NO2, NOx,SO2 
 # FOR TEMPERATURE,2
 # Tamsui,Datong ka temperature kabhi record hi nahi hua he so now changing them
 # only null,#,*,x
@@ -126,10 +127,45 @@ data = []
 # 	writer = csv.writer(f)
 # 	for row in data:
 # 		writer.writerow(row)
-cities = []
+scam = {
+	'Banqiao':'Taipei',
+	'Cailiao':'New Taipei',
+	'Datong':'Taoyuan',
+	'Dayuan':"Hsinchu",
+	'Guanyin':"Hsinchu City",
+	'Guting':"Keelung",
+	'Keelung':"Yilan",
+	'Linkou':"Miaoli",
+	'Longtan':"Changhua",
+	'Pingzhen':"Nantou",
+	'Sanchong':"Yunlin",
+	'Shilin':"Taichung",
+	'Songshan':"Chiayi",
+	'Tamsui':"Chiayi City",
+	'Taoyuan':"Pingtung",
+	'Tucheng':"Tainan",
+	'Wanhua':"Kaohsiung",
+	'Wanli':"Hualien",
+	'Xindian':"Taitung",
+	'Xinzhuang':"Penghu",
+	'Xizhi':"Kinmen",
+	'Yangming':"Lianjiang",
+}
+# cities = []
+# with open('2015_Air_quality_in_northern_Taiwan.csv','r') as f:
+# 	reader = csv.reader(f)
+# 	for row in reader:
+# 		if row[1] not in cities:
+# 			cities.append(row[1])
+# 			print(row[1])
+# print(len(cities))
+data = [['time','city','CO','NO','NO2','NOx','SO2']]
 with open('2015_Air_quality_in_northern_Taiwan.csv','r') as f:
 	reader = csv.reader(f)
 	for row in reader:
-		if row[1] not in cities:
-			cities.append(row[1])
-			print(row[1])
+		if row[1] in scam:
+			data.append([row[0],scam[row[1]],row[4],row[6],row[7],row[8],row[16]])
+with open('final.csv','w') as f:
+	writer = csv.writer(f)
+	for row in data:
+		writer.writerow(row)
