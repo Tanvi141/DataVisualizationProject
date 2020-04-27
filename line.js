@@ -12,28 +12,28 @@ var lineFunction = d3.line()
 
 function showlineGraph(rows){
     //preprocess
-    var dayline=[]
-    for(var i=0;i<rows.length;i+=24){
-        var avg = new Array(attributes.length).fill(0)
-        var city = rows[i].city
-        // console.log(city)
-        for(var j=i;j<i+24;j++)
-        {
-            // console.log(rows[j])
-            avg = avg.map((val,idx) => val + parseFloat(rows[j].attributes[idx]))
-        }
-        // console.log(avg)
-        avg = avg.map((val) => {if(mak[city]<val/24)mak[city]=val/24; return val/24})
-        daywise[city].push(avg)
-        dayline.push({
-           attributes: avg,
-            date:rows[i].date,
-            city:rows[i].city,
-            time: rows[i].time
-        })
-    }
+    // var dayline=[]
+    // for(var i=0;i<rows.length;i+=24){
+    //     var avg = new Array(attributes.length).fill(0)
+    //     var city = rows[i].city
+    //     // console.log(city)
+    //     for(var j=i;j<i+24;j++)
+    //     {
+    //         // console.log(rows[j])
+    //         avg = avg.map((val,idx) => val + parseFloat(rows[j].attributes[idx]))
+    //     }
+    //     // console.log(avg)
+    //     avg = avg.map((val) => {if(mak[city]<val/24)mak[city]=val/24; return val/24})
+    //     daywise[city].push(avg)
+    //     dayline.push({
+    //        attributes: avg,
+    //         date:rows[i].date,
+    //         city:rows[i].city,
+    //         time: rows[i].time
+    //     })
+    // }
     data=dayline.filter(d=>(d.city==21 && (d.time.day==14 || d.time.day==28)))
-    console.log("called",data)
+    // console.log("called",data)
     margin = ({top:20, right:30, bottom:30, left:40})
     var width = svgline.attr('width') - margin.left - margin.right
     var height = svgline.attr('height') - margin.bottom - margin.top
@@ -46,11 +46,11 @@ function showlineGraph(rows){
     .attr("transform", `translate(${margin.left},0)`)
     .call(d3.axisLeft(y))
     .call(g => g.select(".domain").remove())
-    .call(g => g.select(".tick:last-of-type text").clone()
-        .attr("x", 3)
-        .attr("text-anchor", "start")
-        .attr("font-weight", "bold")
-        .text(data.attributes[3]))
+    // .call(g => g.select(".tick:last-of-type text").clone()
+    //     .attr("x", 3)
+    //     .attr("text-anchor", "start")
+    //     .attr("font-weight", "bold")
+    //     .text(data.attributes[3]))
         
     x = d3.scaleTime()
     .domain(d3.extent(data, d => d.date))
