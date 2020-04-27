@@ -79,15 +79,19 @@ d3.json("http://localhost:8000/taiwan.topo.json", function (data) {
         .data(topo.features)
         .enter()
         .append("path")
-        .attr('id',function(d){return d.properties.COUNTYNAME})
+        .attr('id',function(d){if(d.properties.COUNTYNAME=='Tainan')console.log(d);return d.properties.COUNTYNAME})
         .attr("d", path)
         .attr("fill", function(d) {
             return colorMap[d.properties.COUNTYNAME];
         // return colorMap[d.COUNTYNAME]    
             })
-        .attr("stroke", "rgba(238, 238, 238, 0.5)")
+        // .attr("stroke", "rgba(238, 238, 238, 0.5)")
+        .attr("stroke", function(d){return colorMap[d.properties.COUNTYNAME]})
         .on("mouseover", function(d) {
-            d3.select(this).attr("fill", "orange");     
+            d3.select(this).attr("fill", "orange");
+            d3.selectAll('#'+d.properties.COUNTYNAME)
+            .attr('fill','orange')
+            .attr("stroke", 'orange')
             var center = getCentroid(d3.select(this)); 
             d3.select("#tooltip")
             .style("left", center[0]+1000 + "px")
@@ -98,6 +102,9 @@ d3.json("http://localhost:8000/taiwan.topo.json", function (data) {
         })
         .on("mouseout", function(d) {
             d3.select(this).attr("fill", colorMap[d.properties.COUNTYNAME]);
+            d3.selectAll('#'+d.properties.COUNTYNAME)
+            .attr('fill',colorMap[d.properties.COUNTYNAME])
+            .attr("stroke", function(d){return colorMap[d.properties.COUNTYNAME]})
             d3.select("#tooltip").classed("hidden", true); 
         })
         .on('click',function(d){
