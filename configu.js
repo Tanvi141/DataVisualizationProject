@@ -62,7 +62,7 @@ d3.csv("http://localhost:8000/final.csv", function (d) {
         rows.push({...entry})
     }
 
-    showlineGraph(rows)
+    var dayline=[]
     for(var i=0;i<rows.length;i+=24){
         var avg = new Array(attributes.length).fill(0)
         var city = rows[i].city
@@ -75,25 +75,31 @@ d3.csv("http://localhost:8000/final.csv", function (d) {
         // console.log(avg)
         avg = avg.map((val) => {if(mak[city]<val/24)mak[city]=val/24; return val/24})
         daywise[city].push(avg)
+        dayline.push({
+           attributes: avg,
+            date:rows[i].date,
+            city:rows[i].city,
+        })
         // console.log(avg)
     }
+    showlineGraph(rows)
 
-    for(var i=0;i<attributes.length;i++)
-        gaswise.push([])
-    for(var j=0;j<attributes.length;j++)
-        for(var i=0;i<365;i++)
-            gaswise[j].push([])
+    // for(var i=0;i<attributes.length;i++)
+    //     gaswise.push([])
+    // for(var j=0;j<attributes.length;j++)
+    //     for(var i=0;i<365;i++)
+    //         gaswise[j].push([])
 
-    for(var i=0;i<daywise.length;i++)
-    {
-        for(var j=0;j<daywise[i].length;j++)
-        {
-            for(var k=0;k<attributes.length;k++)
-            {
-                gaswise[k][j].push(daywise[i][j][k])
-            }
-        }
-    }
+    // for(var i=0;i<daywise.length;i++)
+    // {
+    //     for(var j=0;j<daywise[i].length;j++)
+    //     {
+    //         for(var k=0;k<attributes.length;k++)
+    //         {
+    //             gaswise[k][j].push(daywise[i][j][k])
+    //         }
+    //     }
+    // }
     
 })
 $(document).ready(function(){
