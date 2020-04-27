@@ -1,14 +1,13 @@
-var div = d3.select('#barRace')
-var svgbar = div.append('svg')
-.attr('height',800)
-.attr('width',800)
+var width_map = 600,   
+height_map = 520;
+
 
 var div_map = d3.select("#map")
     .append("svg")
     .attr("width", width_map)
     .attr("height", height_map)
     .attr("transform", "translate(" + -300 + "," + height_map / 3 + ")"); 
-    
+
 
 function getRandomColor() {
     var letters = '0123456789ABCDEF';
@@ -30,7 +29,7 @@ function showTimeCity(){
         clearInterval(myVar);
     }
     else{
-        // con  sole.log(idx)
+        // console.log(idx)
         if(idx!=0)
         gbar.remove()
         if(idx==-1)
@@ -102,7 +101,7 @@ d3.json("http://localhost:8000/taiwan.topo.json", function (data) {
             d3.select("#tooltip").classed("hidden", true); 
         })
         .on('click',function(d){
-            if(flag==0){
+            if(flag_bar==0){
             city_selected = places.indexOf(d.properties.COUNTYNAME);
             clearInterval(myVar)
             myVar = setInterval("showTimeCity()",time);

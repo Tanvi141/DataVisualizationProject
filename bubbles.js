@@ -6,7 +6,7 @@ div_map.selectAll('.bubble').data(bubbles)
 .attr('r',20)
 .attr('fill','red')
 .on('click',function(d,i){
-    if(flag==1){
+    if(flag_bar==1){
     gas_selected = i;
     clearInterval(myVar);
     myVar = setInterval("showTimeGas()",time);

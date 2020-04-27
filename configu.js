@@ -1,6 +1,4 @@
 var time=100
-const separators=[':',' ','/']
-var rows=[];
 var daywise = [];
 var gaswise = [];
 var myVar=0
@@ -12,13 +10,13 @@ var places=['Taipei','New Taipei','Taoyuan','Hsinchu','Hsinchu City','Keelung','
 var city_selected=0
 var gas_selected=0 
 var selected_cities = ['Taipei','New Taipei','Taoyuan','Hsinchu','Hsinchu City']
-var flag = 0
+var flag_bar = 0
 var bubbles = [ 50, 100, 150, 200, 250]
-var width_map = 600,   
-height_map = 520;
 
 
 d3.csv("http://localhost:8000/final.csv", function (d) {
+    
+    var rows=[];    
     
     for(var i=0;i<places.length;i++)//separate index for each city
     daywise.push([])
@@ -32,7 +30,8 @@ d3.csv("http://localhost:8000/final.csv", function (d) {
         var entry={}
         
         //parsing for the time
-        // console.log(d[i])
+        const separators=[':',' ','/']
+
         times=d[i].time.split(new RegExp(separators.join('|'), 'g'))
         entry_time={
             year: Number(times[0]), 
@@ -107,14 +106,14 @@ function changeView(){
         document.getElementById('button').innerHTML = 'Gas View'
         myVar = setInterval("showTimeGas()",time);
         idx=-1
-        flag=1
+        flag_bar=1
     }
     else{
         document.getElementById('button').innerHTML = 'City View'
         clearInterval(myVar)
         myVar = setInterval("showTimeCity()",time)
         idx=-1
-        flag=0
+        flag_bar=0
     }
 }
 
