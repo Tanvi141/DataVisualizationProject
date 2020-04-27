@@ -31,7 +31,7 @@ function showTimeCity(){
     else{
         // console.log(idx)
         if(idx!=0)
-        gbar.remove()
+        // gbar.remove()
         if(idx==-1)
         idx=0
         // console.log(daywise[0][idx],daywise[0][idx+1])
@@ -45,7 +45,7 @@ function showTimeGas(){
     }
     else{
         if(idx!=0)
-        gbar.remove()
+        // gbar.remove()
         if(idx==-1)
         idx=0
         var qwe = selected_cities.map((d) => places.indexOf(d))

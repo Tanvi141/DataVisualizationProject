@@ -1,4 +1,5 @@
 var time=100
+var rows=[];    
 var daywise = [];
 var gaswise = [];
 var myVar=0
@@ -15,9 +16,7 @@ var bubbles = [ 50, 100, 150, 200, 250]
 
 
 d3.csv("http://localhost:8000/final.csv", function (d) {
-    
-    var rows=[];    
-    
+        
     for(var i=0;i<places.length;i++)//separate index for each city
     daywise.push([])
     // daywise = new Array(places.length).fill([])
@@ -40,6 +39,8 @@ d3.csv("http://localhost:8000/final.csv", function (d) {
             hour: Number(times[3]),
         }
 
+        entry_date= new Date(entry_time.year,entry_time.month-1,entry_time.day,entry_time.hour,0)
+
         //finding the city
         entry_place=places.indexOf(d[i].city)
 
@@ -47,19 +48,21 @@ d3.csv("http://localhost:8000/final.csv", function (d) {
         entry_attributes=[]
         for(var j=0;j<attributes.length;j++){
             at=attributes[j]
-            entry_attributes.push(d[i][at])
+            entry_attributes.push(Number(d[i][at]))
             if(makgases[j]<d[i][at])
-                makgases[j] = d[i][at]
+                makgases[j] = Number(d[i][at])
         }
 
         entry={
             time:entry_time,
             city:entry_place,
             attributes:entry_attributes,
+            date:entry_date,
         }
         rows.push({...entry})
     }
-    console.log(rows.length)
+
+    showlineGraph(rows)
     for(var i=0;i<rows.length;i+=24){
         var avg = new Array(attributes.length).fill(0)
         var city = rows[i].city
