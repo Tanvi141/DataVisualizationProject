@@ -5,8 +5,9 @@ svgline = div.append('svg')
 
 
 var lineFunction = d3.line()
-.x(function(d) { return x(d.date); })
-.y(function(d) { return y(d.rate); })
+    .x(function(d, i) { return x(d.date); }) // set the x values for the line generator
+    .y(function(d) { return y(d.attributes[3]); }) // set the y values for the line generator 
+    .curve(d3.curveMonotoneX)
 // .interpolate("linear");
 
 function showlineGraph(data){
@@ -43,7 +44,8 @@ function showlineGraph(data){
         .call(yAxis);
 
     svgline.append("path")
-        .attr("d", lineFunction(data))
+        .datum(data)
+        .attr("d",lineFunction)
         .attr("stroke", "blue")
         .attr("stroke-width", 2)
         .attr("fill", "none");
