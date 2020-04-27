@@ -3,6 +3,12 @@ svgline = div.append('svg')
 .attr('height',800)
 .attr('width',800)
 
+
+var lineFunction = d3.line()
+.x(function(d) { return x(d.date); })
+.y(function(d) { return y(d.rate); })
+// .interpolate("linear");
+
 function showlineGraph(data){
     console.log("called",data)
     margin = ({top:20, right:30, bottom:30, left:40})
@@ -10,7 +16,7 @@ function showlineGraph(data){
     var height = svgbar.attr('height') - margin.bottom - margin.top
 
     y = d3.scaleLinear()
-    .domain([0, d3.max(data, d=> d.attributes[0])]).nice()
+    .domain([0, d3.max(data, d=> d.attributes[3])]).nice()
     .range([height - margin.bottom, margin.top])
 
     yAxis = g => g
@@ -21,7 +27,7 @@ function showlineGraph(data){
         .attr("x", 3)
         .attr("text-anchor", "start")
         .attr("font-weight", "bold")
-        .text(data.attributes[0]))
+        .text(data.attributes[3]))
         
     x = d3.scaleTime()
     .domain(d3.extent(data, d => d.date))
@@ -35,40 +41,11 @@ function showlineGraph(data){
         .call(xAxis);
     svgline.append("g")
         .call(yAxis);
+
+    svgline.append("path")
+        .attr("d", lineFunction(data))
+        .attr("stroke", "blue")
+        .attr("stroke-width", 2)
+        .attr("fill", "none");
+
 }
-
-
-    
-    
-//     svgline.append("g")
-//         .call(yAxis);
-    
-//     svgline.append("path")
-//         .datum(data)
-//         .attr("fill", "none")
-//         .attr("stroke", "steelblue")
-//         .attr("stroke-width", 1.5)
-//         .attr("d", line)
-//         .call(transition);
-// }
-
-// function tweenDash() {
-//     const l = this.getTotalLength(),
-//         i = d3.interpolateString("0," + l, l + "," + l);
-//     return function(t) { return i(t) };
-// }
-
-// function transition(path) {
-//     path.transition()
-//         .duration(7500)
-//         .attrTween("stroke-dasharray", tweenDash)
-//         .on("end", () => { d3.select(this).call(transition); });
-// }
-
-// line = d3.line()
-//     .defined(d => !isNaN(d.value))
-//     .x(d => x(d.date))
-//     .y(d => y(d.value))
-    
-
-
