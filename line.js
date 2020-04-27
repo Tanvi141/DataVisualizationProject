@@ -1,7 +1,7 @@
 var svgline = d3.select('#lineAnimated')
 svgline = div.append('svg')
 .attr('height',800)
-.attr('width',800)
+.attr('width',1500)
 
 
 var lineFunction = d3.line()
@@ -13,22 +13,22 @@ var lineFunction = d3.line()
 function showlineGraph(data){
     console.log("called",data)
     margin = ({top:20, right:30, bottom:30, left:40})
-    var width = svgbar.attr('width') - margin.left - margin.right
-    var height = svgbar.attr('height') - margin.bottom - margin.top
+    var width = svgline.attr('width') - margin.left - margin.right
+    var height = svgline.attr('height') - margin.bottom - margin.top
 
     y = d3.scaleLinear()
     .domain([0, d3.max(data, d=> d.attributes[3])]).nice()
     .range([height - margin.bottom, margin.top])
 
-    yAxis = g => g
-    .attr("transform", `translate(${margin.left},0)`)
-    .call(d3.axisLeft(y))
-    .call(g => g.select(".domain").remove())
-    .call(g => g.select(".tick:last-of-type text").clone()
-        .attr("x", 3)
-        .attr("text-anchor", "start")
-        .attr("font-weight", "bold")
-        .text(data.attributes[3]))
+    // yAxis = g => g
+    // .attr("transform", `translate(${margin.left},0)`)
+    // .call(d3.axisLeft(y))
+    // .call(g => g.select(".domain").remove())
+    // .call(g => g.select(".tick:last-of-type text").clone()
+    //     .attr("x", 3)
+    //     .attr("text-anchor", "start")
+    //     .attr("font-weight", "bold")
+    //     .text(data.attributes[3]))
         
     x = d3.scaleTime()
     .domain(d3.extent(data, d => d.date))
@@ -40,8 +40,8 @@ function showlineGraph(data){
 
     svgline.append("g")
         .call(xAxis);
-    svgline.append("g")
-        .call(yAxis);
+    // svgline.append("g")
+    //     .call(yAxis);
 
     svgline.append("path")
         .datum(data)
