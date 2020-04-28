@@ -4,6 +4,8 @@
     <script src="http://d3js.org/d3.v4.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://d3js.org/topojson.v1.min.js"></script>
+    <link href="noUiSlider-14.1.1/distribute/nouislider.css" rel="stylesheet">
+    <script src="noUiSlider-14.1.1/distribute/nouislider.js"></script>
     <style>
         #tooltip {
              position: absolute;
@@ -34,14 +36,14 @@
                stroke: steelblue;
                stroke-width: 1.5px;
           }
- 
+          
      </style>
 </head>
 <body>
     <div>
-         <button type="button" onclick="changeView()" id="button">City View</button>
     <div id='barRace' style="float: left;"></div>
     <div id='lineAnimated' style="float: left;"></div>
+    <div id='panel' style="width:300px"></div>
     <div id='map' style="float: right;"></div>
     </div>
     <div id="tooltip" class="hidden">
@@ -56,4 +58,5 @@
 <script type = "text/javascript" src = "./map.js"></script>
 <script type = "text/javascript" src = "./bubbles.js"></script>
 <script type = "text/javascript" src = "./line.js"></script>
+<script type = "text/javascript" src = "./panel.js"></script>
 </html>
