@@ -1,5 +1,5 @@
 var colorBubbles = {}
-bubbles.map((d) => {colorBubbles[d]=getRandomColor()})
+attributes.map((d) => {colorBubbles[d]=getRandomColor()})
 console.log(colorBubbles)
 
 div_map.selectAll('.bubble').data(bubbles)
@@ -8,9 +8,8 @@ div_map.selectAll('.bubble').data(bubbles)
 .attr('cx',function(d){return d})
 .attr('cy',30)
 .attr('r',20)
-.attr('fill',function(d){return colorBubbles[d]})
+.attr('fill',function(d){return colorBubbles[attributes[(d/50)-1]]})
 .on('click',function(d,i){
-    console.log("clicked")
     gas_selected = i;
     restartGraph();
 })
@@ -23,7 +22,6 @@ div_map.selectAll('.text').data(bubbles)
 .attr('text-anchor',"middle")
 .text(function(d,i){return attributes[i]})
 .on('click',function(d,i){
-    console.log("clicked")
     gas_selected = i;
     restartGraph();
 })

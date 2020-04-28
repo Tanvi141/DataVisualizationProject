@@ -60,7 +60,7 @@ function showBarGraphCity(data,nxt,day){
     .attr('y',function(d){return yscalebar(d)})
     .attr('width', function(d){return xscalebar.bandwidth()})
     .attr('height', function(d){return height-yscalebar(d)})
-    .style('fill','#123123')
+    .style('fill',function(d,ind){if(selected_view =="Gas View"){return colorBubbles[attributes[ind]]}else{return colorMap[selected_cities[ind]]}})
     .transition()
     .duration(time)
     .ease(d3.easeLinear)
