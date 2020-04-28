@@ -25,7 +25,7 @@ console.log(colorMap)
 var idx_time=0
 function showTimeCity(){
     
-    if(idx_time>=360){
+    if((idx_time>=360 && selected_time=="Daywise View")||(idx_time>=23 && selected_time=="Hourwise View")){
         clearInterval(myVar);
     }
     else{   
@@ -38,9 +38,10 @@ function showTimeCity(){
         showBarGraphCity(daywise[city_selected][idx_time],daywise[city_selected][idx_time+1],idx_time+1);
         idx_time++;
     }
+    // console.log(selected_time,idx_time)
 }
 function showTimeGas(){
-    if(idx_time>=360){
+    if((idx_time>=360 && selected_time=="Daywise View")||(idx_time>=24 && selected_time=="Hourwise View")){
         clearInterval(myVar);
     }
     else{

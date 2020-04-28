@@ -91,7 +91,6 @@ d3.csv("http://localhost:8000/final.csv", function (d) {
             }
         }
     }
-    showlineGraph(rows)
     myVar = setInterval("showTimeCity()",time);
 
 })

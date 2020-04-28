@@ -98,7 +98,7 @@ function changeTime() {
         selected_time = "Daywise View"
     }
     updateSliders();
-    restartGraph();
+    restartGraph(1);
 }
 
 function createSliders() {
@@ -141,7 +141,19 @@ function createSliders() {
         leftptr = values[0];
         rightptr = values[1];
         restartGraph(1);
-    });
+    });    
+    
+    // stepSlider1.noUiSlider.on('slide', function (values, handle) {
+    //     leftptr = values[0];
+    //     rightptr = values[1];
+    //     restartGraph(1);
+    // });
+
+    // stepSlider2.noUiSlider.on('slide', function (values, handle) {
+    //     leftptr = values[0];
+    //     rightptr = values[1];
+    //     restartGraph(1);
+    // });
 }
 
 function updateSliders() {
@@ -151,10 +163,16 @@ function updateSliders() {
     if (selected_time == "Hourwise View") {
         stepSlider1.style.display = "none";
         stepSlider2.style.display = "block";
+        var values=stepSlider2.noUiSlider.get();
+        leftptr=values[0];
+        rightptr=values[1];
     }
     else {
         stepSlider2.style.display = "none";
         stepSlider1.style.display = "block";
+        var values=stepSlider1.noUiSlider.get();
+        leftptr=values[0];
+        rightptr=values[1];
     }
 }
 
@@ -263,7 +281,8 @@ function restartGraph(recalculate=0) {
         gaswise=newgaswise
     }
 
-    console.log(daywise[3])    
+    console.log("daywise",daywise)    
+    console.log("gaswise",gaswise)    
 
     if(selected_graph=="Bar Graph"){
         idx_time = -1
@@ -274,6 +293,9 @@ function restartGraph(recalculate=0) {
         else{
             myVar = setInterval("showTimeGas()", time);
         }
+    }
+    else{
+        showlineGraph(rows)
     }
 }
 
