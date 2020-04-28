@@ -11,7 +11,6 @@ var places=['Taipei','New Taipei','Taoyuan','Hsinchu','Hsinchu City','Keelung','
 var city_selected=0
 var gas_selected=0 
 var selected_cities = ['Taipei','New Taipei','Taoyuan','Hsinchu','Hsinchu City']
-var flag_bar = 0
 var bubbles = [ 50, 100, 150, 200, 250]
 
 

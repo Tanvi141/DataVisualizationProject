@@ -109,7 +109,7 @@ d3.json("http://localhost:8000/taiwan.topo.json", function (data) {
             d3.select("#tooltip").classed("hidden", true); 
         })
         .on('click',function(d){
-            if(flag_bar==0){
+            if(selected_view =="Gas View"){
             city_selected = places.indexOf(d.properties.COUNTYNAME);
             clearInterval(myVar)
             myVar = setInterval("showTimeCity()",time);

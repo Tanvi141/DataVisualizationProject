@@ -61,19 +61,15 @@ function createPanel() {
 
 function changeView() {
     var ele = document.getElementById('viewtext')
-    clearInterval(myVar)
     if (ele.innerHTML == 'City View') {
         ele.innerHTML = 'Gas View'
-        myVar = setInterval("showTimeGas()", time);
-        flag_bar = 1
+        selected_view = "Gas View";
     }
     else {
         ele.innerHTML = 'City View'
-        myVar = setInterval("showTimeCity()", time)
-        flag_bar = 0
+        selected_view = "City View";
     }
-    idx_time = -1
-    selected_view = ele.innerHTML;
+    restartGraph();
 }
 
 function changeGraph() {
@@ -87,7 +83,8 @@ function changeGraph() {
         selected_graph = "Bar Graph"
     }
 
-    updateGraph()
+    updateGraph();
+    restartGraph();
 }
 
 function changeTime() {
@@ -100,7 +97,8 @@ function changeTime() {
         ele.innerHTML = 'Daywise View';
         selected_time = "Daywise View"
     }
-    updateSliders()
+    updateSliders();
+    restartGraph();
 }
 
 function createSliders() {
@@ -180,20 +178,22 @@ createSliders()
 updateSliders()
 updateGraph()
 
-function restartGraph(recalculate) {
+function restartGraph(recalculate=0) {
     clearInterval(myVar)
 
     //first preprocess the data if required
     console.log(rows)
 
-    var newdaywise=[]
-    var newgaswise=[]
+  
     if (recalculate == 1) {
-        leftptr=+leftptr
-        rightptr=+rightptr
+        var newdaywise=[]
+        var newgaswise=[]
+
         //if it is newdaywise then for each day average hourly values 
         //if it is hourwise find all the days in the range and average for each value
         if(selected_time=="Daywise View"){
+            leftptr=+leftptr
+            rightptr=+rightptr
             //daywise
             for (var i = 0; i < places.length; i++)
                 newdaywise.push([])
@@ -258,14 +258,23 @@ function restartGraph(recalculate) {
                 }
             }
         }
+
+        daywise=newdaywise
+        gaswise=newgaswise
     }
 
-    
-    
-    console.log(leftptr, rightptr)
-    console.log(leftdate, rightdate)
-    console.log("newgaswise", newgaswise)
-    console.log("newdaywise", newdaywise)
+    console.log(daywise[3])    
+
+    if(selected_graph=="Bar Graph"){
+        idx_time = -1
+        console.log(selected_view)
+        if(selected_view=="Gas View"){
+            myVar = setInterval("showTimeCity()", time);
+        }
+        else{
+            myVar = setInterval("showTimeGas()", time);
+        }
+    }
 }
 
 function timestamp(str) {

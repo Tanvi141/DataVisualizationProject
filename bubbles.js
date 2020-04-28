@@ -10,11 +10,9 @@ div_map.selectAll('.bubble').data(bubbles)
 .attr('r',20)
 .attr('fill',function(d){return colorBubbles[d]})
 .on('click',function(d,i){
-    if(flag_bar==1){
+    console.log("clicked")
     gas_selected = i;
-    clearInterval(myVar);
-    myVar = setInterval("showTimeGas()",time);
-    idx_time=-1}
+    restartGraph();
 })
 
 div_map.selectAll('.text').data(bubbles)
@@ -25,9 +23,7 @@ div_map.selectAll('.text').data(bubbles)
 .attr('text-anchor',"middle")
 .text(function(d,i){return attributes[i]})
 .on('click',function(d,i){
-    if(flag_bar==1){
+    console.log("clicked")
     gas_selected = i;
-    clearInterval(myVar);
-    myVar = setInterval("showTimeGas()",time);
-    idx_time=-1}
+    restartGraph();
 })

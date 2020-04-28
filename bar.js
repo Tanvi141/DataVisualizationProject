@@ -16,7 +16,7 @@ function showBarGraphCity(data,nxt,day){
     var xlabel,ylabel;
     gbar = svgbar.append('g').attr('transform','translate('+marginL+','+marginU+')')
     gbar.append('text').attr('x',500).attr('y',0).text('Day: ' + day).attr('font-size',32)
-    if(flag_bar==0)
+    if(selected_view =="Gas View")
     {
         yscalebar = yscalebar.domain([0,mak[city_selected]])
         xscalebar = xscalebar.domain(attributes.map(function(d){return d}))
@@ -56,7 +56,7 @@ function showBarGraphCity(data,nxt,day){
     bars = bars
     .enter()
     .append('rect')
-    .attr('x',function(d,i){if(flag_bar==0){return xscalebar(attributes[i])} else{return xscalebar(selected_cities[i])} })
+    .attr('x',function(d,i){if(selected_view =="Gas View"){return xscalebar(attributes[i])} else{return xscalebar(selected_cities[i])} })
     .attr('y',function(d){return yscalebar(d)})
     .attr('width', function(d){return xscalebar.bandwidth()})
     .attr('height', function(d){return height-yscalebar(d)})
