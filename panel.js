@@ -76,13 +76,17 @@ function changeView(){
 }
 
 function changeGraph(){
-    var ele  = document.getElementById('graphtext')    
+    var ele  = document.getElementById('graphtext');    
     if(ele.innerHTML =='Bar Graph'){ 
         ele.innerHTML = 'Line Graph'
+        selected_graph="Line Graph"
     }
     else{
         ele.innerHTML = 'Bar Graph'
+        selected_graph="Bar Graph"
     }
+
+    updateGraph()
 }
 
 function changeTime(){
@@ -150,6 +154,21 @@ function updateSliders(){
         stepSlider1.style.display="block";    
     }
 }
+
+function updateGraph(){
+    console.log(selected_graph)
+    var bardiv= document.getElementById('barRace');
+    var linediv=document.getElementById('lineAnimated');
+    if(selected_graph=="Bar Graph"){
+        bardiv.style.display="block";
+        linediv.style.display="none";
+    }
+    else{
+        bardiv.style.display="none";
+        linediv.style.display="block";
+    }
+}
 createPanel()
 createSliders()
 updateSliders()
+updateGraph() 

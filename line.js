@@ -1,5 +1,5 @@
-var svgline = d3.select('#lineAnimated')
-svgline = div.append('svg')
+var divline = d3.select('#lineAnimated')
+var svgline = divline.append('svg')
 .attr('height',800)
 .attr('width',800)
 
