@@ -91,10 +91,12 @@ d3.csv("http://localhost:8000/final.csv", function (d) {
             }
         }
     }
+    
     myVar = setInterval("showTimeCity()",time);
 
 })
 $(document).ready(function(){
+    d3.selectAll('#bubble').attr('display','none');
     // myVar = setInterval("showTimeCity()",time);
     // showlineGraph(rows)
 })

@@ -81,7 +81,7 @@ d3.json("http://localhost:8000/taiwan.topo.json", function (data) {
         .data(topo.features)
         .enter()
         .append("path")
-        .attr('id',function(d){if(d.properties.COUNTYNAME=='Tainan')console.log(d);return d.properties.COUNTYNAME})
+        .attr('id',function(d){return d.properties.COUNTYNAME.split(' ').join('')})
         .attr("d", path)
         .attr("fill", function(d) {
             return colorMap[d.properties.COUNTYNAME];
@@ -110,6 +110,7 @@ d3.json("http://localhost:8000/taiwan.topo.json", function (data) {
             d3.select("#tooltip").classed("hidden", true); 
         })
         .on('click',function(d){
+            if(selected_graph== "Bar Graph"){
             if(selected_view =="Gas View"){
             city_selected = places.indexOf(d.properties.COUNTYNAME);
             clearInterval(myVar)
@@ -127,6 +128,24 @@ d3.json("http://localhost:8000/taiwan.topo.json", function (data) {
                 clearInterval(myVar)
                 myVar = setInterval("showTimeGas()",time);
                 idx_time=-1
+            }}
+            else{
+                if(selected_view =="Gas View"){
+                    console.log(selected_graph,selected_view)
+                    city_selected = places.indexOf(d.properties.COUNTYNAME);
+                    showlineGraph(rows)
+                }
+                else{
+                    var clicked = d.properties.COUNTYNAME;
+                    if(selected_cities.includes(clicked)){
+                        var id = selected_cities.indexOf(clicked)
+                        selected_cities.splice(id,1)
+                    }
+                    else{
+                        selected_cities.push(clicked)
+                    }
+                    showlineGraph(rows)
+                }
             }
         })
         .append("title")

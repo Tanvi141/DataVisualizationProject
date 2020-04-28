@@ -64,10 +64,12 @@ function changeView() {
     if (ele.innerHTML == 'City View') {
         ele.innerHTML = 'Gas View'
         selected_view = "Gas View";
+        d3.selectAll('#bubble').attr('display','none');
     }
     else {
         ele.innerHTML = 'City View'
         selected_view = "City View";
+        d3.selectAll('#bubble').attr('display','block');
     }
     restartGraph();
 }
@@ -200,7 +202,7 @@ function restartGraph(recalculate=0) {
     clearInterval(myVar)
 
     //first preprocess the data if required
-    console.log(rows)
+    // console.log(rows)
 
   
     if (recalculate == 1) {
@@ -295,6 +297,7 @@ function restartGraph(recalculate=0) {
         }
     }
     else{
+        console.log(selected_view)
         showlineGraph(rows)
     }
 }

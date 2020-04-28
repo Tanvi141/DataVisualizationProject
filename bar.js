@@ -60,11 +60,19 @@ function showBarGraphCity(data,nxt,day){
     .attr('y',function(d){return yscalebar(d)})
     .attr('width', function(d){return xscalebar.bandwidth()})
     .attr('height', function(d){return height-yscalebar(d)})
-    .style('fill',function(d,ind){if(selected_view =="Gas View"){return colorBubbles[attributes[ind]]}else{return colorMap[selected_cities[ind]]}})
+    .style('fill',function(d,ind){
+        if(selected_view =="Gas View"){
+            return colorBubbles[attributes[ind]]}
+        else{
+            d3.selectAll('#'+selected_cities[ind].split(' ').join(''))
+            .attr('fill','rgb('+(d)*255+',0,0)')
+            .attr('stroke','rgb('+(d)*255+',0,0)')
+            return colorMap[selected_cities[ind]]}})
     .transition()
     .duration(time)
     .ease(d3.easeLinear)
     .attr('y',function(d,i){return yscalebar(nxt[i])})
-    .attr('height',function(d,i){return height-yscalebar(nxt[i])})
+    .attr('height',function(d,i){
+        return height-yscalebar(nxt[i])})
     
 }
