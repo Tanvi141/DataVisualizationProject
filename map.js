@@ -22,39 +22,39 @@ var colorMap = {}
 places.map((d) => {colorMap[d]=getRandomColor()})
 console.log(colorMap)
 
-var idx=0
+var idx_time=0
 function showTimeCity(){
     
-    if(idx>=360){
+    if(idx_time>=360){
         clearInterval(myVar);
     }
     else{   
         // console.log(idx)
-        if(idx!=0)
+        if(idx_time!=0)
         gbar.remove()
-        if(idx==-1)
-        idx=0
+        if(idx_time==-1)
+        idx_time=0
         // console.log(daywise[0][idx],daywise[0][idx+1])
-        showBarGraphCity(daywise[city_selected][idx],daywise[city_selected][idx+1],idx+1);
-        idx++;
+        showBarGraphCity(daywise[city_selected][idx_time],daywise[city_selected][idx_time+1],idx_time+1);
+        idx_time++;
     }
 }
 function showTimeGas(){
-    if(idx>=360){
+    if(idx_time>=360){
         clearInterval(myVar);
     }
     else{
-        if(idx!=0)
+        if(idx_time!=0)
         gbar.remove()
-        if(idx==-1)
-        idx=0
+        if(idx_time==-1)
+        idx_time=0
         var qwe = selected_cities.map((d) => places.indexOf(d))
         // console.log(gas_selected)
-        var curr =  gaswise[gas_selected][idx].filter((d,id) => (qwe.includes(id)))
-        var nxt = gaswise[gas_selected][idx+1].filter((d,id) => (qwe.includes(id)))
+        var curr =  gaswise[gas_selected][idx_time].filter((d,id) => (qwe.includes(id)))
+        var nxt = gaswise[gas_selected][idx_time+1].filter((d,id) => (qwe.includes(id)))
         // console.log(curr,nxt)
-        showBarGraphCity(curr,nxt,idx+1);
-        idx++;
+        showBarGraphCity(curr,nxt,idx_time+1);
+        idx_time++;
     }
 }
 
@@ -113,7 +113,7 @@ d3.json("http://localhost:8000/taiwan.topo.json", function (data) {
             city_selected = places.indexOf(d.properties.COUNTYNAME);
             clearInterval(myVar)
             myVar = setInterval("showTimeCity()",time);
-            idx=-1}
+            idx_time=-1}
             else{
                 var clicked = d.properties.COUNTYNAME;
                 if(selected_cities.includes(clicked)){
@@ -125,7 +125,7 @@ d3.json("http://localhost:8000/taiwan.topo.json", function (data) {
                 }
                 clearInterval(myVar)
                 myVar = setInterval("showTimeGas()",time);
-                idx=-1
+                idx_time=-1
             }
         })
         .append("title")

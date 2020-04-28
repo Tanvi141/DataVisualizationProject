@@ -14,7 +14,7 @@ div_map.selectAll('.bubble').data(bubbles)
     gas_selected = i;
     clearInterval(myVar);
     myVar = setInterval("showTimeGas()",time);
-    idx=-1}
+    idx_time=-1}
 })
 
 div_map.selectAll('.text').data(bubbles)
@@ -29,5 +29,5 @@ div_map.selectAll('.text').data(bubbles)
     gas_selected = i;
     clearInterval(myVar);
     myVar = setInterval("showTimeGas()",time);
-    idx=-1}
+    idx_time=-1}
 })

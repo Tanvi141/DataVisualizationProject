@@ -71,7 +71,7 @@ function changeView(){
         myVar = setInterval("showTimeCity()",time)
         flag_bar=0
     }
-    idx=-1
+    idx_time=-1
     selected_view=ele.innerHTML;
 }
 
@@ -168,7 +168,14 @@ function updateGraph(){
         linediv.style.display="block";
     }
 }
+
+//initial functions
 createPanel()
 createSliders()
 updateSliders()
 updateGraph() 
+
+function makeTheMagicHappen(){
+    
+    //first preprocess the data
+}
