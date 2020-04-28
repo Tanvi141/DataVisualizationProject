@@ -58,6 +58,7 @@ function showTimeGas(){
     }
 }
 
+
 function getCentroid(selection) {
     // get the DOM element from a D3 selection
     // you could also use "this" inside .each()

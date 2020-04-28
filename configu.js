@@ -6,7 +6,6 @@ var myVar=0
 var gbar
 var mak=[]
 var makgases = []
-var dayline=[]
 var attributes=['CO','NO2','NO','NOx','SO2'];
 var places=['Taipei','New Taipei','Taoyuan','Hsinchu','Hsinchu City','Keelung','Yilan','Miaoli','Changhua','Nantou','Yunlin','Taichung','Chiayi','Chiayi City','Pingtung','Tainan','Kaohsiung','Hualien','Taitung','Penghu','Kinmen','Lianjiang'];
 var city_selected=0
@@ -76,13 +75,6 @@ d3.csv("http://localhost:8000/final.csv", function (d) {
         // console.log(avg)
         avg = avg.map((val) => {if(mak[city]<val/24)mak[city]=val/24; return val/24})
         daywise[city].push(avg)
-        dayline.push({
-           attributes: avg,
-            date:rows[i].date,
-            city:rows[i].city,
-            time: rows[i].time,
-        })
-        // console.log(avg)
     }
     for(var i=0;i<attributes.length;i++)
         gaswise.push([])
@@ -109,24 +101,3 @@ $(document).ready(function(){
     // myVar = setInterval("showTimeCity()",time);
     // showlineGraph(rows)
 })
-
-
-
-function changeView(){
-    var val  = document.getElementById('button').innerHTML;
-    if(val =='City View'){ 
-        clearInterval(myVar)
-        document.getElementById('button').innerHTML = 'Gas View'
-        myVar = setInterval("showTimeGas()",time);
-        idx=-1
-        flag_bar=1
-    }
-    else{
-        document.getElementById('button').innerHTML = 'City View'
-        clearInterval(myVar)
-        myVar = setInterval("showTimeCity()",time)
-        idx=-1
-        flag_bar=0
-    }
-}
-
