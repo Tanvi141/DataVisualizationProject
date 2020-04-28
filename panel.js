@@ -189,6 +189,8 @@ function restartGraph(recalculate) {
     var newdaywise=[]
     var newgaswise=[]
     if (recalculate == 1) {
+        leftptr=+leftptr
+        rightptr=+rightptr
         //if it is newdaywise then for each day average hourly values 
         //if it is hourwise find all the days in the range and average for each value
         if(selected_time=="Daywise View"){
@@ -199,12 +201,12 @@ function restartGraph(recalculate) {
                 var avg = new Array(attributes.length).fill(0)
                 var city = rows[i].city
                 // console.log(city)
-                for (var j = i; j < i + 24; j++) {
+                for (var j = i+leftptr; j <= i + rightptr; j++) {
                     // console.log(rows[j])
                     avg = avg.map((val, idx) => val + parseFloat(rows[j].attributes[idx]))
                 }
                 // console.log(avg)
-                avg = avg.map((val) => { if (mak[city] < val / 24) mak[city] = val / 24; return val / 24 })
+                avg = avg.map((val) => { if (mak[city] < val / (rightptr-leftptr+1)) mak[city] = val /(rightptr-leftptr+1); return val /(rightptr-leftptr+1)})
                 newdaywise[city].push(avg)
             }
             for (var i = 0; i < attributes.length; i++)
@@ -221,15 +223,45 @@ function restartGraph(recalculate) {
                 }
             }
         }
+        else{
+            var leftdate = new Date(+leftptr)
+            var rightdate = new Date(+rightptr)
 
+            //hourwise
+            for(var c=0;c<places.length;c++){
+                newdaywise.push([])
+                for(var hr=0;hr<24;hr++){
+                    var currrows=rows.filter(function(d){
+                        return d.date.getTime()>leftdate.getTime() && d.date.getTime()<rightdate.getTime() && d.time.hour==hr && d.city==c;
+                    })
+                    var avg = new Array(attributes.length).fill(0)
+
+                    for (var j = 0; j < currrows.length; j++) {
+                        avg = avg.map((val, idx) => val + parseFloat(currrows[j].attributes[idx]))
+                    }
+                    avg = avg.map((val) => { if (mak[city] < val / currrows.length) mak[city] = val / currrows.length; return val / currrows.length })
+                    newdaywise[c].push(avg)
+                }
+            }
+
+            for (var i = 0; i < attributes.length; i++)
+                newgaswise.push([])
+            for (var j = 0; j < attributes.length; j++)
+                for (var i = 0; i < 24; i++)
+                    newgaswise[j].push([])
+
+            for (var i = 0; i < newdaywise.length; i++) {
+                for (var j = 0; j < newdaywise[i].length; j++) {
+                    for (var k = 0; k < attributes.length; k++) {
+                        newgaswise[k][j].push(newdaywise[i][j][k])
+                    }
+                }
+            }
+        }
     }
 
-    else{
-        //hourwise
-
-    }
-    var leftdate = new Date(+leftptr)
-    var rightdate = new Date(+rightptr)
+    
+    
     console.log(leftptr, rightptr)
     console.log(leftdate, rightdate)
     console.log("newgaswise", newgaswise)
