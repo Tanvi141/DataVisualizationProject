@@ -137,7 +137,7 @@ function showlineGraph(rows){
         .attr('y',0)
         .attr('width',width)
         .attr('height',height - margin.bottom)
-        .attr('fill',"rgba(0, 0, 0, 1)")
+        .attr('fill',"rgb(236, 253, 252)")
         .transition()
         .duration(5000)
         .ease(d3.easeLinear) 
