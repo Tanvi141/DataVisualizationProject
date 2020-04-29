@@ -11,12 +11,11 @@ var lineFunction = d3.line()
     .x(function(d, i) {return x(dates_all[d.date]); }) // set the x values for the line generator
     .y(function(d) { return y(d.val); }) // set the y values for the line generator 
     .curve(d3.curveMonotoneX)
-// .interpolate("linear");
+
 var lineFunction2 = d3.line()
-    .x(function(d, i) { return x(d.date); }) // set the x values for the line generator
+    .x(function(d, i) { return x(i); }) // set the x values for the line generator
     .y(function(d) { return y(d.val); }) // set the y values for the line generator 
     .curve(d3.curveMonotoneX)
-// .interpolate("linear");
 
 
 function showlineGraph(rows){
@@ -31,14 +30,24 @@ function showlineGraph(rows){
     margin = ({top:20, right:30, bottom:30, left:40})
     var width = svgline.attr('width') - margin.left - margin.right
     var height = svgline.attr('height') - margin.bottom - margin.top
-
+    
+    if(selected_time=="Daywise View"){
+        x = d3.scaleTime()
+        .domain(d3.extent(rows, d => d.date))
+        .range([margin.left, width - margin.right])
+    }
+    else{
+        x = d3.scaleLinear()
+        .domain([0,23])
+        .range([margin.left, width - margin.right])
+    }
     if(selected_view=='Gas View')
     {
         var max=0;
         //plot the lines for all gases in city_selected
         for(var i=0;i<attributes.length;i++){
             var gas_entry=[]
-            // console.log(dates_all)
+
             for(var j=0;j<dates_all.length;j++){
                 gas_entry.push({
                     date: j,
@@ -56,22 +65,27 @@ function showlineGraph(rows){
         y = d3.scaleLinear()
             .domain([0, max]).nice()
             .range([height - margin.bottom, margin.top])
-        x = d3.scaleTime()
-            .domain(d3.extent(rows, d => d.date))
-            .range([margin.left, width - margin.right])
+
         var xaxis = svgline.append('g').call(d3.axisBottom(x).ticks(width / 80).tickSizeOuter(0)).attr("transform", `translate(0,${height - margin.bottom})`)
         var yaxis =svgline.append('g').call(d3.axisLeft(y)).attr("transform", `translate(${margin.left},0)`)
         dataNest.forEach(function(d,i){
-            // console.log(d,i);
-            svgline.append("path")
-            .datum(d.points)
-            .attr("d",lineFunction)
-            .attr("stroke", function(){console.log(d); return colorBubbles[attributes[+d.gas]]})
-            .attr("stroke-width", 2)
-            .attr("fill", "none");
+            if(selected_time=="Daywise View")
+                svgline.append("path")
+                    .datum(d.points)
+                    .attr("d",lineFunction)
+                    .attr("stroke", function(){console.log(d); return colorBubbles[attributes[+d.gas]]})
+                    .attr("stroke-width", 2)
+                    .attr("fill", "none");
+            else
+                svgline.append("path")
+                    .datum(d.points)
+                    .attr("d",lineFunction2)
+                    .attr("stroke", function(){console.log(d); return colorBubbles[attributes[+d.gas]]})
+                    .attr("stroke-width", 2)
+                    .attr("fill", "none");
         });
     }
-    else{
+    else{ //city view
         var max=0;
         for(var i=0;i<places.length;i++){
             if(selected_cities.includes(places[i])){
@@ -95,19 +109,26 @@ function showlineGraph(rows){
         y = d3.scaleLinear()
             .domain([0, max]).nice()
             .range([height - margin.bottom, margin.top])
-        x = d3.scaleTime()
-            .domain(d3.extent(rows, d => d.date))
-            .range([margin.left, width - margin.right])
         var xaxis = svgline.append('g').call(d3.axisBottom(x).ticks(width / 80).tickSizeOuter(0)).attr("transform", `translate(0,${height - margin.bottom})`)
         var yaxis =svgline.append('g').call(d3.axisLeft(y)).attr("transform", `translate(${margin.left},0)`)
         dataNest.forEach(function(d,i){
             console.log(d,i);
-            svgline.append("path")
-            .datum(d.points)
-            .attr("d",lineFunction)
-            .attr("stroke", function(){console.log(d); return colorMap[places[+d.city]]})
-            .attr("stroke-width", 2)
-            .attr("fill", "none");
+            if(selected_time=="Daywise View")
+                svgline.append("path")
+                    .datum(d.points)
+                    .attr("d",lineFunction)
+                    .attr("stroke", function(){console.log(d); return colorMap[places[+d.city]]})
+                    .attr("stroke-width", 2)
+                    .attr("fill", "none");
+                
+            else
+                svgline.append("path")
+                    .datum(d.points)
+                    .attr("d",lineFunction2)
+                    .attr("stroke", function(){console.log(d); return colorMap[places[+d.city]]})
+                    .attr("stroke-width", 2)
+                    .attr("fill", "none");
+                
         });
     }
 
@@ -116,7 +137,7 @@ function showlineGraph(rows){
         .attr('y',0)
         .attr('width',width)
         .attr('height',height - margin.bottom)
-        .attr('fill','#fff')
+        .attr('fill',"rgba(0, 0, 0, 1)")
         .transition()
         .duration(5000)
         .ease(d3.easeLinear) 
