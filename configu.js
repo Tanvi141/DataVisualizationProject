@@ -2,6 +2,7 @@ var time=1000
 var rows=[];    
 var daywise = [];
 var gaswise = [];
+var dates_all=[];
 var myVar=0
 var gbar
 var mak=[]
@@ -57,6 +58,9 @@ d3.csv("http://localhost:8000/final3.csv", function (d) {
             city:entry_place,
             attributes:entry_attributes,
             date:entry_date,
+        }
+        if(entry_place==0 && entry_time.hour==0){
+            dates_all.push(entry_date);
         }
         rows.push({...entry})
     }
