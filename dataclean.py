@@ -154,21 +154,41 @@ scam = {
 	'Zhongli':'Tainan City',
 	'Zhongshan':'Taichung City',
 }
-cities = []
-with open('2015_Air_quality_in_northern_Taiwan.csv','r') as f:
-	reader = csv.reader(f)
-	for row in reader:
-		if row[1] not in cities:
-			cities.append(row[1])
-			print(row[1])
-print(len(cities))
+# cities = []
+# with open('2015_Air_quality_in_northern_Taiwan.csv','r') as f:
+# 	reader = csv.reader(f)
+# 	for row in reader:
+# 		if row[1] not in cities:
+# 			cities.append(row[1])
+# 			print(row[1])
+# print(len(cities))
+# data = [['time','city','CO','NO','NO2','NOx','SO2']]
+# with open('2015_Air_quality_in_northern_Taiwan.csv','r') as f:
+# 	reader = csv.reader(f)
+# 	for row in reader:
+# 		if row[1] in scam:
+# 			data.append([row[0],scam[row[1]],row[4],row[6],row[7],row[8],row[16]])
+# with open('final.csv','w') as f:
+# 	writer = csv.writer(f)
+# 	for row in data:
+# 		writer.writerow(row)
 data = [['time','city','CO','NO','NO2','NOx','SO2']]
-with open('2015_Air_quality_in_northern_Taiwan.csv','r') as f:
+
+with open('final2.csv','r') as f:
 	reader = csv.reader(f)
+	next(reader)
 	for row in reader:
-		if row[1] in scam:
-			data.append([row[0],scam[row[1]],row[4],row[6],row[7],row[8],row[16]])
+		day = int(row[0].split('/')[2].split(' ')[0])
+		month = int(row[0].split('/')[1])
+		if(month!=2):
+			if(day==1 or day==15):
+				data.append(row)
+		else:
+			if(day==1 or day==14):
+				data.append(row)
 with open('final.csv','w') as f:
 	writer = csv.writer(f)
 	for row in data:
 		writer.writerow(row)
+
+		
