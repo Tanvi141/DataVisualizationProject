@@ -1,4 +1,4 @@
-var time=100
+var time=1000
 var rows=[];    
 var daywise = [];
 var gaswise = [];
@@ -14,7 +14,7 @@ var selected_cities = ['Taipei','New Taipei','Taoyuan','Hsinchu','Hsinchu City']
 var bubbles = [ 50, 100, 150, 200, 250]
 
 
-d3.csv("http://localhost:8000/final2.csv", function (d) {
+d3.csv("http://localhost:8000/final3.csv", function (d) {
         
     for(var i=0;i<places.length;i++)//separate index for each city
     daywise.push([])
