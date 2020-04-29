@@ -7,14 +7,14 @@ var gbar
 var mak=[]
 var makgases = []
 var attributes=['CO','NO2','NO','NOx','SO2'];
-var places=['Taipei','New Taipei','Taoyuan','Hsinchu','Hsinchu City','Keelung','Yilan','Miaoli','Changhua','Nantou','Yunlin','Taichung','Chiayi','Chiayi City','Pingtung','Tainan','Kaohsiung','Hualien','Taitung','Penghu','Kinmen','Lianjiang'];
+var places=['Taipei','New Taipei','Taoyuan','Hsinchu','Hsinchu City','Keelung','Yilan','Miaoli','Changhua','Nantou','Yunlin','Taichung','Chiayi','Chiayi City','Pingtung','Tainan','Kaohsiung','Hualien','Taitung','Penghu','Kinmen','Lianjiang','Tainan City','Kaohsiung City','Taichung City'];
 var city_selected=0
 var gas_selected=0 
 var selected_cities = ['Taipei','New Taipei','Taoyuan','Hsinchu','Hsinchu City']
 var bubbles = [ 50, 100, 150, 200, 250]
 
 
-d3.csv("http://localhost:8000/final.csv", function (d) {
+d3.csv("http://localhost:8000/final2.csv", function (d) {
         
     for(var i=0;i<places.length;i++)//separate index for each city
     daywise.push([])

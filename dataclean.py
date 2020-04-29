@@ -150,15 +150,18 @@ scam = {
 	'Xinzhuang':"Penghu",
 	'Xizhi':"Kinmen",
 	'Yangming':"Lianjiang",
+	'Yonghe':'Kaohsiung City',
+	'Zhongli':'Tainan City',
+	'Zhongshan':'Taichung City',
 }
-# cities = []
-# with open('2015_Air_quality_in_northern_Taiwan.csv','r') as f:
-# 	reader = csv.reader(f)
-# 	for row in reader:
-# 		if row[1] not in cities:
-# 			cities.append(row[1])
-# 			print(row[1])
-# print(len(cities))
+cities = []
+with open('2015_Air_quality_in_northern_Taiwan.csv','r') as f:
+	reader = csv.reader(f)
+	for row in reader:
+		if row[1] not in cities:
+			cities.append(row[1])
+			print(row[1])
+print(len(cities))
 data = [['time','city','CO','NO','NO2','NOx','SO2']]
 with open('2015_Air_quality_in_northern_Taiwan.csv','r') as f:
 	reader = csv.reader(f)

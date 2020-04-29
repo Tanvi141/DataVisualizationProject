@@ -70,30 +70,30 @@ function getCentroid(selection) {
     return [bbox.x + bbox.width/2, bbox.y + bbox.height/2];
 }
 
-d3.json("http://localhost:8000/taiwan.topo.json", function (data) {
+d3.json("http://localhost:8000/taiwan3.topo.json", function (data) {
 
     topo = topojson.feature(data, data.objects["layer1"]);
 
     prj = d3.geoMercator().center([120.979531, 23.978567]).scale(8000);
     path = d3.geoPath().projection(prj);
-    console.log(path)
+    console.log(topo.features)
     div_map.selectAll("path")
         .data(topo.features)
         .enter()
         .append("path")
-        .attr('id',function(d){return d.properties.COUNTYNAME.split(' ').join('')})
+        .attr('id',function(d){console.log(d.properties.COUNTYNAME);return d.properties.COUNTYNAME.split(' ').join('')})
         .attr("d", path)
         .attr("fill", function(d) {
             return colorMap[d.properties.COUNTYNAME];
         // return colorMap[d.COUNTYNAME]    
             })
-        // .attr("stroke", "rgba(238, 238, 238, 0.5)")
-        .attr("stroke", function(d){return colorMap[d.properties.COUNTYNAME]})
+        .attr("stroke", "rgba(0, 0, 0, 1)")
+        // .attr("stroke", function(d){return colorMap[d.properties.COUNTYNAME]})
         .on("mouseover", function(d) {
             d3.select(this).attr("fill", "orange");
             d3.selectAll('#'+d.properties.COUNTYNAME)
             .attr('fill','orange')
-            .attr("stroke", 'orange')
+            // .attr("stroke", 'orange')
             var center = getCentroid(d3.select(this)); 
             d3.select("#tooltip")
             .style("left", center[0]+1000 + "px")
@@ -106,7 +106,7 @@ d3.json("http://localhost:8000/taiwan.topo.json", function (data) {
             d3.select(this).attr("fill", colorMap[d.properties.COUNTYNAME]);
             d3.selectAll('#'+d.properties.COUNTYNAME)
             .attr('fill',colorMap[d.properties.COUNTYNAME])
-            .attr("stroke", function(d){return colorMap[d.properties.COUNTYNAME]})
+            // .attr("stroke", function(d){return colorMap[d.properties.COUNTYNAME]})
             d3.select("#tooltip").classed("hidden", true); 
         })
         .on('click',function(d){
