@@ -1,4 +1,4 @@
-var time=1000
+var time=500
 var rows=[];    
 var daywise = [];
 var gaswise = [];
@@ -12,7 +12,14 @@ var city_selected=0
 var gas_selected=0 
 var selected_cities = ['Taipei','New Taipei','Taoyuan','Hsinchu','Hsinchu City']
 var bubbles = [ 50, 100, 150, 200, 250]
-
+var zones = []
+k=0
+for(var i=0;i<places.length;i++)
+{
+    zones.push('rgb('+(255-k)+',0,0)')
+    k+=10
+}
+console.log(zones)
 
 d3.csv("http://localhost:8000/final3.csv", function (d) {
         
@@ -20,7 +27,15 @@ d3.csv("http://localhost:8000/final3.csv", function (d) {
     daywise.push([])
     // daywise = new Array(places.length).fill([])
     mak = new Array(places.length).fill(0)
-    makgases = new Array(attributes.length).fill(0)
+    // makgases = new Array(places.length).fill([])
+    for(var j=0;j<places.length;j++)
+    makgases.push([])
+    for(var j=0;j<makgases.length;j++)
+    {
+        for(var k=0;k<attributes.length;k++)
+        makgases[j].push(0)
+    }
+    console.log(makgases)
     // gaswise = new Array(attributes.length).fill([])
     console.log(d.length)
     console.log(places.length)
@@ -48,8 +63,8 @@ d3.csv("http://localhost:8000/final3.csv", function (d) {
         for(var j=0;j<attributes.length;j++){
             at=attributes[j]
             entry_attributes.push(Number(d[i][at]))
-            if(makgases[j]<d[i][at])
-                makgases[j] = Number(d[i][at])
+            if(makgases[entry_place][j]<Number(d[i][at]))
+                makgases[entry_place][j] = Number(d[i][at])
         }
 
         entry={

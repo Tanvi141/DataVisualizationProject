@@ -25,7 +25,7 @@ console.log(colorMap)
 var idx_time=0
 function showTimeCity(){
     
-    if((idx_time>=24 && selected_time=="Daywise View")||(idx_time>=23 && selected_time=="Hourwise View")){
+    if((idx_time>=23 && selected_time=="Daywise View")||(idx_time>=23 && selected_time=="Hourwise View")){
         clearInterval(myVar);
     }
     else{   
@@ -41,7 +41,7 @@ function showTimeCity(){
     // console.log(selected_time,idx_time)
 }
 function showTimeGas(){
-    if((idx_time>=24 && selected_time=="Daywise View")||(idx_time>=24 && selected_time=="Hourwise View")){
+    if((idx_time>=23 && selected_time=="Daywise View")||(idx_time>=24 && selected_time=="Hourwise View")){
         clearInterval(myVar);
     }
     else{
@@ -87,12 +87,11 @@ d3.json("http://localhost:8000/taiwan3.topo.json", function (data) {
             return colorMap[d.properties.COUNTYNAME];
         // return colorMap[d.COUNTYNAME]    
             })
-        .attr("stroke", "rgba(0, 0, 0, 1)")
+        .attr("stroke", "rgba(0, 0, 0, 0.5)")
+        .attr('stroke-width',2)
         // .attr("stroke", function(d){return colorMap[d.properties.COUNTYNAME]})
         .on("mouseover", function(d) {
             d3.select(this).attr("fill", "orange");
-            d3.selectAll('#'+d.properties.COUNTYNAME)
-            .attr('fill','orange')
             // .attr("stroke", 'orange')
             var center = getCentroid(d3.select(this)); 
             d3.select("#tooltip")
@@ -104,8 +103,6 @@ d3.json("http://localhost:8000/taiwan3.topo.json", function (data) {
         })
         .on("mouseout", function(d) {
             d3.select(this).attr("fill", colorMap[d.properties.COUNTYNAME]);
-            d3.selectAll('#'+d.properties.COUNTYNAME)
-            .attr('fill',colorMap[d.properties.COUNTYNAME])
             // .attr("stroke", function(d){return colorMap[d.properties.COUNTYNAME]})
             d3.select("#tooltip").classed("hidden", true); 
         })
