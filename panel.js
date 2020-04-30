@@ -142,32 +142,62 @@ function createSliders() {
     stepSlider2.noUiSlider.on('end', function (values, handle) {
         leftptr = values[0];
         rightptr = values[1];
+        var leftdate = new Date(+leftptr)
+        var rightdate = new Date(+rightptr)
+        console.log(leftdate)
+        startdate.innerHTML=parseDate(leftdate);
+        enddate.innerHTML=parseDate(rightdate);
         restartGraph(1);
     });    
     
-    // stepSlider1.noUiSlider.on('slide', function (values, handle) {
-    //     leftptr = values[0];
-    //     rightptr = values[1];
-    //     restartGraph(1);
-    // });
+    stepSlider1.noUiSlider.on('slide', function (values, handle) {
+        leftptr = values[0];
+        rightptr = values[1];
+        restartGraph(1);
+    });
 
-    // stepSlider2.noUiSlider.on('slide', function (values, handle) {
-    //     leftptr = values[0];
-    //     rightptr = values[1];
-    //     restartGraph(1);
-    // });
+    stepSlider2.noUiSlider.on('slide', function (values, handle) {
+        leftptr = values[0];
+        rightptr = values[1];
+        var leftdate = new Date(+leftptr)
+        var rightdate = new Date(+rightptr)
+        console.log(leftdate)
+        startdate.innerHTML=parseDate(leftdate);
+        enddate.innerHTML=parseDate(rightdate);
+        restartGraph(1);
+    });
+
+    //text boxes for the dates
+    var d1=new Date(dates_all[0]);
+    var startdate=document.createElement("p");
+    startdate.innerHTML = "";
+    startdate.id = "startdate";
+
+    var enddate=document.createElement("p");
+    enddate.innerHTML=""
+    enddate.id="enddate"
+
+    stepSlider2.appendChild(startdate);
+    stepSlider2.appendChild(enddate);
 }
 
 function updateSliders() {
     var stepSlider1 = document.getElementById('hourslider');
     var stepSlider2 = document.getElementById('monthslider');
-
+    var startdate=document.getElementById('startdate');
+    var enddate=document.getElementById('enddate');
+    
     if (selected_time == "Hourwise View") {
         stepSlider1.style.display = "none";
         stepSlider2.style.display = "block";
         var values=stepSlider2.noUiSlider.get();
         leftptr=values[0];
         rightptr=values[1];
+        var leftdate = new Date(+leftptr)
+        var rightdate = new Date(+rightptr)
+        console.log(leftdate)
+        startdate.innerHTML=parseDate(leftdate);
+        enddate.innerHTML=parseDate(rightdate);
     }
     else {
         stepSlider2.style.display = "none";
@@ -284,8 +314,8 @@ function restartGraph(recalculate=1) {
         gaswise=newgaswise
     }
 
-    console.log("daywise",daywise)    
-    console.log("gaswise",gaswise)    
+    // console.log("daywise",daywise)    
+    // console.log("gaswise",gaswise)    
 
     if(selected_graph=="Bar Graph"){
         idx_time = -1
@@ -310,4 +340,12 @@ function timestamp(str) {
 
 function toFormat(v) {
     return parseInt(v).toString();
+}
+
+function parseDate(d){
+    const ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d)
+    const mo = new Intl.DateTimeFormat('en', { month: 'short' }).format(d)
+    const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d)
+
+    return `${da}-${mo}-${ye}`;
 }
