@@ -68,21 +68,45 @@ function showlineGraph(rows){
 
         var xaxis = svgline.append('g').call(d3.axisBottom(x).ticks(width / 80).tickSizeOuter(0)).attr("transform", `translate(0,${height - margin.bottom})`)
         var yaxis =svgline.append('g').call(d3.axisLeft(y)).attr("transform", `translate(${margin.left},0)`)
+        xaxis.append('text')
+            .attr('x',width-250)
+            .attr('y',50)
+            .attr('text-anchor','end')
+            .attr('stroke','blue')
+            .attr('fill','black')
+            .style('font-size',27)
+            .text(function(){if(selected_time=="Daywise View") return "day of the year";else{return "time of the day"}})
+
+        yaxis.append('text')
+            .attr('transform','rotate(-90)')
+            .attr('x',-250)
+            .attr('y',-20)
+            .attr('text-anchor','end')
+            .attr('stroke','blue')
+            .attr('fill','black')
+            .style('font-size',27)
+            .style('z-index',1)
+            .text(function(){if(selected_view=="Gas View") return `concentration in ${places[city_selected]}`; else return `concentration of ${attributes[gas_selected]}`})
+
         dataNest.forEach(function(d,i){
             if(selected_time=="Daywise View")
                 svgline.append("path")
                     .datum(d.points)
                     .attr("d",lineFunction)
                     .attr("stroke", function(){console.log(d); return colorBubbles[attributes[+d.gas]]})
-                    .attr("stroke-width", 2)
-                    .attr("fill", "none");
+                    .attr("stroke-width", 3)
+                    .attr("fill", "none")
+                    .append("svg:title")
+                      .text(function(d, i) { return attributes[+d.gas] });
             else
                 svgline.append("path")
                     .datum(d.points)
                     .attr("d",lineFunction2)
                     .attr("stroke", function(){console.log(d); return colorBubbles[attributes[+d.gas]]})
-                    .attr("stroke-width", 2)
-                    .attr("fill", "none");
+                    .attr("stroke-width", 3)
+                    .attr("fill", "none")
+                    .append("svg:title")
+                      .text(function(d, i) { return attributes[+d.gas] });
         });
     }
     else{ //city view
@@ -111,6 +135,26 @@ function showlineGraph(rows){
             .range([height - margin.bottom, margin.top])
         var xaxis = svgline.append('g').call(d3.axisBottom(x).ticks(width / 80).tickSizeOuter(0)).attr("transform", `translate(0,${height - margin.bottom})`)
         var yaxis =svgline.append('g').call(d3.axisLeft(y)).attr("transform", `translate(${margin.left},0)`)
+        xaxis.append('text')
+            .attr('x',width-250)
+            .attr('y',50)
+            .attr('text-anchor','end')
+            .attr('stroke','blue')
+            .attr('fill','black')
+            .style('font-size',27)
+            .text(function(){if(selected_time=="Daywise View") return "day of the year";else{return "time of the day"}})
+
+        yaxis.append('text')
+            .attr('transform','rotate(-90)')
+            .attr('x',-250)
+            .attr('y',-20)
+            .attr('text-anchor','end')
+            .attr('stroke','blue')
+            .attr('fill','black')
+            .style('font-size',27)
+            .style('z-index',1)
+            .text(function(){if(selected_view=="Gas View") return `concentration in ${places[city_selected]}`; else return `concentration of ${attributes[gas_selected]}`})
+
         dataNest.forEach(function(d,i){
             console.log(d,i);
             if(selected_time=="Daywise View")
@@ -118,16 +162,22 @@ function showlineGraph(rows){
                     .datum(d.points)
                     .attr("d",lineFunction)
                     .attr("stroke", function(){console.log(d); return colorMap[places[+d.city]]})
-                    .attr("stroke-width", 2)
-                    .attr("fill", "none");
+                    .attr("stroke-width", 3)
+                    .attr("fill", "none")
+                    .append("svg:title")
+                      .text(function(d, i) { return places[+d.city] });
+
                 
             else
                 svgline.append("path")
                     .datum(d.points)
                     .attr("d",lineFunction2)
                     .attr("stroke", function(){console.log(d); return colorMap[places[+d.city]]})
-                    .attr("stroke-width", 2)
-                    .attr("fill", "none");
+                    .attr("stroke-width", 3)
+                    .attr("fill", "none")
+                    .append("svg:title")
+                      .text(function(d, i) { return places[+d.city] });
+
             var n = d.points.length
             console.log(d.points[0])
             svgline.append('text')
