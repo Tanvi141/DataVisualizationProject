@@ -1,5 +1,15 @@
-# DataVisualizationProject
-#### https://github.com/g0v/twgeojson/blob/master/json/twCounty2010.topo.json?short_path=2b1faaa
-#### https://github.com/g0v/twgeojson/blob/master/json/twCounty2010.topo.json
-#### http://bl.ocks.org/chihsuan/0a8820d9d51c8365afcb
-#### http://bl.ocks.org/chihsuan/raw/0a8820d9d51c8365afcb/
+# Data Visualization Project
+
+Download the code to enjoy
+
+## Prerequisites
+
+An internet connection is required to view the visualization.
+
+## Running the program
+
+1. Execute this command in the directory:
+	- `python3 -m http.server`
+2. Open in browser:
+    - `localhost:8000
+     

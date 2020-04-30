@@ -72,7 +72,7 @@ function createPanel() {
     labelsliders.id="slidersbreak"
 
     var inst=document.createElement("p");
-    inst.innerHTML="Slide the slider to select the range of time over which values of gas shown in the graph are averaged."
+    inst.innerHTML="select the range of time over which values of the gases are averaged"
 
     var selectPanel = document.getElementById('panel');
     selectPanel.appendChild(graphtext);
