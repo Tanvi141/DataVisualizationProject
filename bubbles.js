@@ -1,6 +1,6 @@
 var colorBubbles = {}
 attributes.map((d) => {colorBubbles[d]=getRandomColor()})
-// console.log(colorBubbles)
+// labeling the gases
 div_map
 .append('text')
 .attr('x',215)
@@ -8,6 +8,7 @@ div_map
 .attr('font-weight','bold')
 .attr('font-size',24)
 .text('Gases')
+// representing bubbles as circle
 div_map.selectAll('.bubble').data(bubbles)
 .enter()
 .append('circle')
@@ -31,7 +32,7 @@ div_map.selectAll('.bubble').data(bubbles)
     restartGraph();}
 })
 
-
+//adding text inside the bubble
 div_map.selectAll('.text').data(bubbles)
 .enter()
 .append('text')

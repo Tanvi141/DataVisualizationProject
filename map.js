@@ -1,14 +1,14 @@
 var width_map = 600,   
 height_map = 520;
 
-
+//svg element for map
 var div_map = d3.select("#map")
     .append("svg")
     .attr("width", width_map)
     .attr("height", height_map)
     .attr("transform", "translate(" + -200 + "," + height_map / 3 + ")"); 
 
-
+// function that generates a random color
 function getRandomColor() {
     var letters = '0123456789ABCDEF';
     var color = '#';
@@ -24,8 +24,10 @@ places.map((d) => {colorMap[d]=getRandomColor()})
 //console.log(colorMap)
 
 var idx_time=0
+// this is controller for city view bar graph
 function showTimeCity(){
     
+    //clearing the interval when graphs are done
     if((idx_time>=23 && selected_time=="Daywise View")||(idx_time>=23 && selected_time=="Hourwise View")){
         clearInterval(myVar);
         
@@ -42,7 +44,10 @@ function showTimeCity(){
     }
     // console.log(selected_time,idx_time)
 }
+// this is controller for gas view bar graph
 function showTimeGas(){
+
+    //clearing the interval when graphs are done
     if((idx_time>=23 && selected_time=="Daywise View")||(idx_time>=23 && selected_time=="Hourwise View")){
         clearInterval(myVar);
         console.log("sdfasdfasdfsafsadf")
@@ -67,7 +72,7 @@ function showTimeGas(){
     }
 }
 
-
+// for getting the centroid of the city
 function getCentroid(selection) {
     // get the DOM element from a D3 selection
     // you could also use "this" inside .each()
@@ -77,7 +82,7 @@ function getCentroid(selection) {
         // return the center of the bounding box
     return [bbox.x + bbox.width/2, bbox.y + bbox.height/2];
 }
-
+// displaying the map
 d3.json("http://localhost:8000/taiwan3.topo.json", function (data) {
 
     topo = topojson.feature(data, data.objects["layer1"]);
@@ -115,13 +120,15 @@ d3.json("http://localhost:8000/taiwan3.topo.json", function (data) {
             d3.select("#tooltip").classed("hidden", true); 
         })
         .on('click',function(d){
-            if(selected_graph== "Bar Graph"){
+            if(selected_graph== "Bar Graph"){//in case of bar graph
             if(selected_view =="Gas View"){
+            //changing the selected city
             city_selected = places.indexOf(d.properties.COUNTYNAME);
             clearInterval(myVar)
             myVar = setInterval("showTimeCity()",time);
             idx_time=-1}
             else{
+                //appending to the selected cities in case of city view
                 var clicked = d.properties.COUNTYNAME;
                 if(selected_cities.includes(clicked)){
                     var id = selected_cities.indexOf(clicked)
@@ -134,13 +141,16 @@ d3.json("http://localhost:8000/taiwan3.topo.json", function (data) {
                 myVar = setInterval("showTimeGas()",time);
                 idx_time=-1
             }}
-            else{
+            else{//in case of line graph
                 if(selected_view =="Gas View"){
+                    //changing the selected city
                     console.log(selected_graph,selected_view)
                     city_selected = places.indexOf(d.properties.COUNTYNAME);
                     showlineGraph(rows)
                 }
                 else{
+                    //appending to the selected cities in case of city view
+                    //you can only have max of 5 cities selected in line graph
                     var clicked = d.properties.COUNTYNAME;
                     if(selected_cities.includes(clicked)){
                         var id = selected_cities.indexOf(clicked)
@@ -154,10 +164,10 @@ d3.json("http://localhost:8000/taiwan3.topo.json", function (data) {
                 }
             }
         })
-        .append("title")
-        .text(function(d) {
-            return d.properties.COUNTYNAME;
-            });
+        // .append("title")
+        // .text(function(d) {
+        //     return d.properties.COUNTYNAME;
+        //     });
 
 
 });

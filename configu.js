@@ -1,20 +1,20 @@
-var time=500
-var rows=[];    
-var daywise = [];
-var gaswise = [];
-var dates_all=[];
-var myVar=0
-var gbar
-var mak=[]
+var time=500//transition time in case of bar graph
+var rows=[];//this stores all the data    
+var daywise = [];//this stores all data in day wise view form,i.e like for each city, concentration of gas
+var gaswise = [];//this stores all data in gas wise view form,i.e like ofr each gases concentration of city
+var dates_all=[];//this contains all dates fro which we have data
+var myVar=0// this is used to setinterval and clearinterval
+var gbar // this this a big group tag for bar graph
+var mak=[] // maximum of each city for each gas
 var makgases = []
-var attributes=['CO','NO2','NO','NOx','SO2'];
+var attributes=['CO','NO2','NO','NOx','SO2']; // these are the gases which we are displaying
 var attributes_units=['CO (ppb)','NO2 (ppm)','NO (ppm)','NOx (ppm)','SO2 (ppb)']
-var places=['Taipei','New Taipei','Taoyuan','Hsinchu','Hsinchu City','Keelung','Yilan','Miaoli','Changhua','Nantou','Yunlin','Taichung','Chiayi','Chiayi City','Pingtung','Tainan','Kaohsiung','Hualien','Taitung','Penghu','Kinmen','Lianjiang','Tainan City','Kaohsiung City','Taichung City'];
-var city_selected=0
-var gas_selected=0 
-var selected_cities = ['Taipei','New Taipei','Taoyuan','Hsinchu','Hsinchu City']
-var bubbles = [ 50, 100, 150, 200, 250]
-var zones = []
+var places=['Taipei','New Taipei','Taoyuan','Hsinchu','Hsinchu City','Keelung','Yilan','Miaoli','Changhua','Nantou','Yunlin','Taichung','Chiayi','Chiayi City','Pingtung','Tainan','Kaohsiung','Hualien','Taitung','Penghu','Kinmen','Lianjiang','Tainan City','Kaohsiung City','Taichung City'];// these are the places in the map
+var city_selected=0// default selected city
+var gas_selected=0 //default selected gas
+var selected_cities = ['Taipei','New Taipei','Taoyuan','Hsinchu','Hsinchu City']// default selected cities
+var bubbles = [ 50, 100, 150, 200, 250]// position of bubbles
+var zones = []// coloring the cities by their pollution level
 k=0
 for(var i=0;i<places.length;i++)
 {
