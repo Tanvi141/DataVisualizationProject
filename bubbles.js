@@ -1,6 +1,6 @@
 var colorBubbles = {}
 attributes.map((d) => {colorBubbles[d]=getRandomColor()})
-console.log(colorBubbles)
+// console.log(colorBubbles)
 
 div_map.selectAll('.text').data(bubbles)
 .enter()

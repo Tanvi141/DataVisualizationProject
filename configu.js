@@ -20,7 +20,7 @@ for(var i=0;i<places.length;i++)
     zones.push('rgb('+(255-k)+',0,0)')
     k+=10
 }
-console.log(zones)
+//console.log(zones)
 
 d3.csv("http://localhost:8000/final3.csv", function (d) {
         
@@ -36,10 +36,10 @@ d3.csv("http://localhost:8000/final3.csv", function (d) {
         for(var k=0;k<attributes.length;k++)
         makgases[j].push(0)
     }
-    console.log(makgases)
+    //console.log(makgases)
     // gaswise = new Array(attributes.length).fill([])
-    console.log(d.length)
-    console.log(places.length)
+    // console.log(d.length)
+    // console.log(places.length)
     for(var i=0;i<d.length;i++){
         var entry={}
         
@@ -110,7 +110,8 @@ d3.csv("http://localhost:8000/final3.csv", function (d) {
             }
         }
     }
-    
+    console.log("daywise",daywise)    
+    console.log("gaswise",gaswise)    
     myVar = setInterval("showTimeCity()",time);
 
 })

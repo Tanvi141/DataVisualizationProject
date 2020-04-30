@@ -108,7 +108,7 @@ function createSliders() {
     var stepSlider2 = document.getElementById('monthslider');
 
     noUiSlider.create(stepSlider1, {
-        start: [2, 10],
+        start: [0, 23],
         step: 1,
         range: {
             'min': [0],
@@ -179,7 +179,7 @@ function updateSliders() {
 }
 
 function updateGraph() {
-    console.log(selected_graph)
+    // console.log(selected_graph)
     var bardiv = document.getElementById('barRace');
     var linediv = document.getElementById('lineAnimated');
     if (selected_graph == "Bar Graph") {
@@ -198,7 +198,7 @@ createSliders()
 updateSliders()
 updateGraph()
 
-function restartGraph(recalculate=0) {
+function restartGraph(recalculate=1) {
     clearInterval(myVar)
 
     //first preprocess the data if required
@@ -215,6 +215,7 @@ function restartGraph(recalculate=0) {
             leftptr=+leftptr
             rightptr=+rightptr
             //daywise
+            console.log(leftptr,rightptr)
             for (var i = 0; i < places.length; i++)
                 newdaywise.push([])
             for (var i = 0; i < rows.length; i += 24) {
@@ -288,7 +289,7 @@ function restartGraph(recalculate=0) {
 
     if(selected_graph=="Bar Graph"){
         idx_time = -1
-        console.log(selected_view)
+        // console.log(selected_view)
         if(selected_view=="Gas View"){
             myVar = setInterval("showTimeCity()", time);
         }
@@ -303,7 +304,7 @@ function restartGraph(recalculate=0) {
 }
 
 function timestamp(str) {
-    console.log("timestamp of ", str, new Date(str).getTime)
+    // console.log("timestamp of ", str, new Date(str).getTime)
     return new Date(str).getTime();
 }
 

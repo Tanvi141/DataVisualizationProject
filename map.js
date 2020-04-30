@@ -21,7 +21,7 @@ function getRandomColor() {
 
 var colorMap = {}
 places.map((d) => {colorMap[d]=getRandomColor()})
-console.log(colorMap)
+//console.log(colorMap)
 
 var idx_time=0
 function showTimeCity(){
@@ -77,12 +77,12 @@ d3.json("http://localhost:8000/taiwan3.topo.json", function (data) {
 
     prj = d3.geoMercator().center([121.079531, 23.678567]).scale(8000);
     path = d3.geoPath().projection(prj);
-    console.log(topo.features)
+    // console.log(topo.features)
     div_map.selectAll("path")
         .data(topo.features)
         .enter()
         .append("path")
-        .attr('id',function(d){console.log(d.properties.COUNTYNAME);return d.properties.COUNTYNAME.split(' ').join('')})
+        .attr('id',function(d){/*console.log(d.properties.COUNTYNAME);*/return d.properties.COUNTYNAME.split(' ').join('')})
         .attr("d", path)
         .attr("fill", function(d) {
             return colorMap[d.properties.COUNTYNAME];

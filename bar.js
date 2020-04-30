@@ -49,11 +49,11 @@ function showBarGraphCity(data,nxt,day){
         // console.log(makgases[gas_selected])
         var qwe=0
         for(var i=0;i<selected_cities.length;i++){
-            console.log(makgases[places.indexOf(selected_cities[i])])
+            // console.log(makgases[places.indexOf(selected_cities[i])])
             if(qwe<makgases[places.indexOf(selected_cities[i])][gas_selected])
             qwe=makgases[places.indexOf(selected_cities[i])][gas_selected]
         }
-        console.log(qwe)
+        // console.log(qwe)
         yscalebar = yscalebar.domain([0,qwe])
         xlabel = 'Cities'
         ylabel = 'Concentration'
