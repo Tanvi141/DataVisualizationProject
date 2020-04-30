@@ -15,7 +15,7 @@ function getRandomColor() {
     for (var i = 0; i < 6; i++) {
         color += letters[Math.floor(Math.random() * 16)];
     }
-    return 'rgb(0,'+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+')'
+    // return 'rgb(0,'+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+')'
     return color;
 }
 
@@ -28,6 +28,7 @@ function showTimeCity(){
     
     if((idx_time>=23 && selected_time=="Daywise View")||(idx_time>=23 && selected_time=="Hourwise View")){
         clearInterval(myVar);
+        
     }
     else{   
         // console.log(idx)
@@ -44,6 +45,12 @@ function showTimeCity(){
 function showTimeGas(){
     if((idx_time>=23 && selected_time=="Daywise View")||(idx_time>=23 && selected_time=="Hourwise View")){
         clearInterval(myVar);
+        console.log("sdfasdfasdfsafsadf")
+        places.forEach(element => {
+            console.log(element)
+            d3.selectAll('#'+element.split(' ').join(''))
+            .attr('fill',colorMap[element])
+        });
     }
     else{
         if(idx_time!=0)
@@ -96,8 +103,8 @@ d3.json("http://localhost:8000/taiwan3.topo.json", function (data) {
             // .attr("stroke", 'orange')
             var center = getCentroid(d3.select(this)); 
             d3.select("#tooltip")
-            .style("left", center[0]+1000 + "px")
-            .style("top", center[1] + "px")
+            .style("left", center[0]+700 + "px")
+            .style("top", center[1]+100 + "px")
             .select("#name")
             .text(d.properties.COUNTYNAME);
             d3.select("#tooltip").classed("hidden", false); 

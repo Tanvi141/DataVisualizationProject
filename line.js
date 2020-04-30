@@ -96,8 +96,7 @@ function showlineGraph(rows){
                     .attr("stroke", function(){console.log(d); return colorBubbles[attributes[+d.gas]]})
                     .attr("stroke-width", 3)
                     .attr("fill", "none")
-                    .append("svg:title")
-                      .text(function(d, i) { return attributes[+d.gas] });
+
             else
                 svgline.append("path")
                     .datum(d.points)
@@ -107,9 +106,15 @@ function showlineGraph(rows){
                     .attr("fill", "none")
                     .append("svg:title")
                       .text(function(d, i) { return attributes[+d.gas] });
+            var n = d.points.length
+            // console.log(d.points)
+            svgline.append('text')
+            .text(attributes[d.gas])
+            .attr("transform", "translate(" + (width-40) + "," + y(d.points[n-1].val) + ")")
         });
     }
     else{ //city view
+        selected_cities = selected_cities.slice(0,5)
         var max=0;
         for(var i=0;i<places.length;i++){
             if(selected_cities.includes(places[i])){

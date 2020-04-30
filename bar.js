@@ -5,10 +5,13 @@ var svgbar = div.append('svg')
 
 function showBarGraphCity(data,nxt,day){
     
+    
     var marginL = 100
     var marginR = 100
     var marginU = 100
     var marginD = 100
+    if(selected_view=='Gas View')
+    marginL = 50
     var width = svgbar.attr('width') - marginL - marginR
     var height = svgbar.attr('height') - marginU - marginD
     var xscalebar = d3.scaleBand().range([0,width]).padding(0.4)

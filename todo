@@ -38,10 +38,10 @@ REMAINING
     Complete labelling in line graph---as of done, it depends on data 
     Show selected Bubble ---
     Comment nicely
-    Shift left bar graph in gas view ---B
+    Shift left bar graph in gas view ---B done
     Show current City in bar graph gas view---done
-    restore map colors when race done B
-    revert the old change in map colors B
-    move the tooltip of map B
-    label gas in line graph B
+    restore map colors when race done B ---done
+    revert the old change in map colors B ---done
+    move the tooltip of map B --- done
+    label gas in line graph B ---done
     
