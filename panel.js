@@ -262,7 +262,10 @@ updateGraph()
 
 function restartGraph(recalculate=1) {
     clearInterval(myVar)
-
+    places.forEach(element => {
+        // console.log(element)
+    d3.selectAll('#'+element.split(' ').join(''))
+    .attr('fill',colorMap[element])}
     //first preprocess the data if required
     // console.log(rows)
 
