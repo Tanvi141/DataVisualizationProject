@@ -15,6 +15,7 @@ var gas_selected=0 //default selected gas
 var selected_cities = ['Taipei','New Taipei','Taoyuan','Hsinchu','Hsinchu City']// default selected cities
 var bubbles = [ 50, 100, 150, 200, 250]// position of bubbles
 var zones = []// coloring the cities by their pollution level
+var conc = ['ppb','ppm','ppm','ppm','ppb']
 k=0
 for(var i=0;i<places.length;i++)
 {

@@ -45,7 +45,7 @@ function showBarGraphCity(data,nxt,day){
         xscalebar = xscalebar.domain(attributes.map(function(d){return d}))
         xlabel = 'gases'
         ylabel = 'concentration in '+places[city_selected];
-        var conc = ['ppb','ppm','ppm','ppm','ppb']
+        
     }
     else
     {   

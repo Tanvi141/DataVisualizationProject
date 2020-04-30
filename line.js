@@ -111,7 +111,7 @@ function showlineGraph(rows){
             var n = d.points.length
             // console.log(d.points)
             svgline.append('text')
-            .text(attributes[d.gas])
+            .text(attributes[d.gas] + '(' + conc[d.gas]+')')
             .attr("transform", "translate(" + (width-40) + "," + y(d.points[n-1].val) + ")")
         });
     }
