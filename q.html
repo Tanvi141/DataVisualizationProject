@@ -4,6 +4,7 @@
     <script src="http://d3js.org/d3.v4.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://d3js.org/topojson.v1.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="noUiSlider-14.1.1/distribute/nouislider.css" rel="stylesheet">
     <script src="noUiSlider-14.1.1/distribute/nouislider.js"></script>
     <style>
@@ -39,6 +40,14 @@
           body {
                background-color:rgb(236, 253, 252);
           }
+          text{
+               padding: 10px;
+               padding-top: 10px;
+               /* margin-left: 40px; */
+          }
+          .buttonlabels{
+               margin-left: 40px;
+          }
      </style>
 </head>
 <body>
@@ -46,7 +55,7 @@
      <div>
     <div id='barRace' style="float: left;"></div>
     <div id='lineAnimated' style="float: left;"></div>
-    <div id='panel' style="float: right;width:300px ;margin-top: 300px; margin-right: 50px;"></div>
+    <div id='panel' style="float: right;width:350px ;margin-top: 200px; margin-right: 50px;border-style: solid; height:400px;padding:10px"><h1 style="margin-bottom:30px;margin-left: 30px;">Control Panel</h1></div>
     <div id='map' style="float: right;"></div>
     </div>
     <div id="tooltip" class="hidden">

@@ -22,7 +22,7 @@ div_map.selectAll('.bubble').data(bubbles)
 .attr('cx',function(d){return d})
 .attr('cy',40)
 .attr('r',20)
-.attr('opacity',0.3)
+// .attr('opacity',0.3)
 .attr('id',function(d,i){'bubble'})
 .attr('fill',function(d){return colorBubbles[attributes[(d/50)-1]]})
 .on('click',function(d,i){

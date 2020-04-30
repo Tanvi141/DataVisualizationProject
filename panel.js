@@ -16,45 +16,71 @@ function createPanel() {
     graphbutton.type = "button";
     graphbutton.value = "Change";
     graphbutton.id = "graphbutton";
+    graphbutton.classList.add("btn");
+    graphbutton.classList.add("btn-outline-primary");
+    graphbutton.classList.add("buttonfancy");
     graphbutton.onclick = function () { changeGraph() }
 
-    var graphtext = document.createElement("p");
+    var graphtext = document.createElement("text");
     graphtext.innerHTML = "Bar Graph";
     graphtext.id = "graphtext";
-
+    graphtext.classList.add("buttonlabels")
 
     var viewbutton = document.createElement("input");
     viewbutton.type = "button";
     viewbutton.value = "Change";
     viewbutton.id = "viewbutton";
+    viewbutton.classList.add("btn");
+    viewbutton.classList.add("btn-outline-primary");
+    viewbutton.classList.add("buttonfancy");
+    viewbutton.classList.add("m-3"); 
     viewbutton.onclick = function () { changeView() };
 
-    var viewtext = document.createElement("p");
+    var viewtext = document.createElement("text");
     viewtext.innerHTML = "Gas View";
     viewtext.id = "viewtext";
-
+    viewtext.classList.add("buttonlabels")
+    
     var timebutton = document.createElement("input");
     timebutton.type = "button";
     timebutton.value = "Change";
     timebutton.id = "timebutton";
+    timebutton.classList.add("btn");
+    timebutton.classList.add("btn-outline-primary");
+    timebutton.classList.add("buttonfancy");
+    timebutton.classList.add("m-1"); 
     timebutton.onclick = function () { changeTime() };
 
-    var timetext = document.createElement("p");
+    var timetext = document.createElement("text");
     timetext.innerHTML = "Daywise View";
     timetext.id = "timetext";
+    timetext.classList.add("buttonlabels")
 
     var slider1 = document.createElement("div");
     slider1.id = "hourslider"
+    slider1.classList.add("m-4")
     var slider2 = document.createElement("div");
     slider2.id = "monthslider"
+    slider2.classList.add("m-4")
+
+    var brk=document.createElement("br");
+    var brk2=document.createElement("br");
+    var brk1=document.createElement("br");
+    
+    var labelsliders=document.createElement("br");
+    labelsliders.id="slidersbreak"
 
     var selectPanel = document.getElementById('panel');
-    selectPanel.appendChild(graphbutton);
     selectPanel.appendChild(graphtext);
-    selectPanel.appendChild(viewbutton);
+    selectPanel.appendChild(graphbutton);
+    selectPanel.appendChild(brk);
     selectPanel.appendChild(viewtext);
-    selectPanel.appendChild(timebutton);
+    selectPanel.appendChild(viewbutton);
+    selectPanel.appendChild(brk2);
     selectPanel.appendChild(timetext);
+    selectPanel.appendChild(timebutton);
+    selectPanel.appendChild(brk1);
+    selectPanel.appendChild(labelsliders)
     selectPanel.appendChild(slider1);
     selectPanel.appendChild(slider2);
 }
@@ -117,7 +143,8 @@ function createSliders() {
         pips: {
             mode: 'steps',
             density: 23,
-        }
+        },
+        tooltips:[{to:timeFormat,from:Number},{to:timeFormat,from:Number}],
     });
     //Show the months
     noUiSlider.create(stepSlider2, {
@@ -169,14 +196,16 @@ function createSliders() {
 
     //text boxes for the dates
     var d1=new Date(dates_all[0]);
-    var startdate=document.createElement("p");
+    var startdate=document.createElement("text");
     startdate.innerHTML = "";
     startdate.id = "startdate";
 
-    var enddate=document.createElement("p");
+    var enddate=document.createElement("text");
     enddate.innerHTML=""
     enddate.id="enddate"
+    var brk=document.createElement("br");
 
+    stepSlider2.appendChild(brk);
     stepSlider2.appendChild(startdate);
     stepSlider2.appendChild(enddate);
 }
@@ -186,10 +215,12 @@ function updateSliders() {
     var stepSlider2 = document.getElementById('monthslider');
     var startdate=document.getElementById('startdate');
     var enddate=document.getElementById('enddate');
+    var brk=document.getElementById('slidersbreak')
     
     if (selected_time == "Hourwise View") {
         stepSlider1.style.display = "none";
         stepSlider2.style.display = "block";
+        brk.style.display="none";
         var values=stepSlider2.noUiSlider.get();
         leftptr=values[0];
         rightptr=values[1];
@@ -202,6 +233,7 @@ function updateSliders() {
     else {
         stepSlider2.style.display = "none";
         stepSlider1.style.display = "block";
+        brk.style.display="block";
         var values=stepSlider1.noUiSlider.get();
         leftptr=values[0];
         rightptr=values[1];
@@ -348,4 +380,9 @@ function parseDate(d){
     const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d)
 
     return `${da}-${mo}-${ye}`;
+}
+
+function timeFormat(v){
+    var ifn=parseInt(v);
+    return `${ifn}:00`
 }
