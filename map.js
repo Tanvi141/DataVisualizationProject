@@ -99,7 +99,7 @@ d3.json("http://localhost:8000/taiwan3.topo.json", function (data) {
         .attr('stroke-width',2)
         // .attr("stroke", function(d){return colorMap[d.properties.COUNTYNAME]})
         .on("mouseover", function(d) {
-            d3.select(this).attr("fill", "orange");
+            d3.select(this).attr("fill", "black");
             // .attr("stroke", 'orange')
             var center = getCentroid(d3.select(this)); 
             d3.select("#tooltip")

@@ -27,7 +27,7 @@ function showlineGraph(rows){
     .attr('width',800)
 
     var dataNest=[];
-    margin = ({top:20, right:30, bottom:30, left:40})
+    margin = ({top:30, right:30, bottom:30, left:60})
     var width = svgline.attr('width') - margin.left - margin.right
     var height = svgline.attr('height') - margin.bottom - margin.top
     
@@ -80,7 +80,7 @@ function showlineGraph(rows){
         yaxis.append('text')
             .attr('transform','rotate(-90)')
             .attr('x',-250)
-            .attr('y',-10)
+            .attr('y',-32)
             .attr('text-anchor','end')
             .attr('stroke','blue')
             .attr('fill','black')

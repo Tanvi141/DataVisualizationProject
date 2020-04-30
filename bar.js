@@ -18,7 +18,7 @@ function showBarGraphCity(data,nxt,day){
     var yscalebar = d3.scaleLinear().range([height,0])
     var xlabel,ylabel;
     gbar = svgbar.append('g').attr('transform','translate('+marginL+','+marginU+')')
-    gbar.append('text').attr('x',500).attr('y',0).text(function(){if(selected_time=="Daywise View") return parseDateSlash(dates_all[day]); else{return timeFormat(day)}}).attr('font-size',32)
+    gbar.append('text').attr('x',500).attr('y',-5).text(function(){if(selected_time=="Daywise View") return parseDateSlash(dates_all[day]); else{return timeFormat(day)}}).attr('font-size',32)
     if(selected_view=='City View'){
         var grayed = places.filter((p) => !selected_cities.includes(p))
 

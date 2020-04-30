@@ -1,7 +1,13 @@
 var colorBubbles = {}
 attributes.map((d) => {colorBubbles[d]=getRandomColor()})
 // console.log(colorBubbles)
-
+div_map
+.append('text')
+.attr('x',215)
+.attr('y',85)
+.attr('font-weight','bold')
+.attr('font-size',24)
+.text('Gases')
 div_map.selectAll('.bubble').data(bubbles)
 .enter()
 .append('circle')
@@ -34,7 +40,12 @@ div_map.selectAll('.text').data(bubbles)
 .attr('id','bubble')
 .attr('font-weight','bold')
 .attr('text-anchor',"middle")
-.text(function(d,i){return attributes[i]})
+.text(function(d,i){return attributes[i].slice(0,2)})
+.append('tspan')
+.text(function(d,i){return attributes[i].slice(2)})
+.style('font-size', '.9rem')
+    .attr('dx', '.01em')
+    .attr('dy', '.3em')
 .on('click',function(d,i){
     if(selected_view=='City View'){
     console.log(d,i)
