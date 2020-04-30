@@ -45,6 +45,7 @@ function showBarGraphCity(data,nxt,day){
         xscalebar = xscalebar.domain(attributes.map(function(d){return d}))
         xlabel = 'gases'
         ylabel = 'concentration in '+places[city_selected];
+        var conc = ['ppb','ppm','ppm','ppm','ppb']
     }
     else
     {   
@@ -65,7 +66,7 @@ function showBarGraphCity(data,nxt,day){
     if(selected_view=='City View')//for city view we are displaying name vercically,so this condition
         var xaxisbar = gbar.append('g').call(d3.axisBottom().scale(xscalebar)).attr('transform','translate(0,'+ height + ')').style('font-size',16).selectAll('text').attr("y", 0).attr("x", 9).attr("dy", ".35em").attr('transform','rotate(90)').style("text-anchor", "start");
     else
-        var xaxisbar = gbar.append('g').call(d3.axisBottom().scale(xscalebar)).attr('transform','translate(0,'+ height + ')').style('font-size',16)
+        var xaxisbar = gbar.append('g').call(d3.axisBottom().scale(xscalebar)).attr('transform','translate(0,'+ height + ')').style('font-size',16).selectAll('text').text(function(d,i){return d.slice(0,2)}).append('tspan').text(function(d,i){return d.slice(2)}).style('font-size', '.9rem').attr('dx', '.01em').attr('dy', '.3em').append('tspan').text(function(d,i){return ' ('+conc[i]+')'}).style('font-size', 18)
     xaxisbar.append('text')
     .attr('x',width-250)
     .attr('y',60)

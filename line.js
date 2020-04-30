@@ -155,7 +155,7 @@ function showlineGraph(rows){
         yaxis.append('text')
             .attr('transform','rotate(-90)')
             .attr('x',-250)
-            .attr('y',-20)
+            .attr('y',-32)
             .attr('text-anchor','end')
             .attr('stroke','black')
             .style('font-family','Comfortaa')
