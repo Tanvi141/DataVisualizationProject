@@ -18,11 +18,12 @@ TO BE DONE
     Show selected Bubble ---
     Bubble visible ---done
     Position elements correctly ---done
+    Show selected Bubble ---
     Comment nicely
     Tooltip for lines in linegraph---done
     Label the axes---done
     Show which current gas on the y-axis (city view for both graphs)---done
-    Show units
+    Show units---done
     Shift left bar graph in gas view ---B
     Show current City in bar graph gas view---done
     restore map colors when race done B
@@ -30,3 +31,17 @@ TO BE DONE
     move the tooltip of map B
     label gas in line graph B
 DONE
+
+REMAINING
+    Background end
+    Key showing what the colors mean in fluctuation of colors---iska kya karna he 
+    Complete labelling in line graph---as of done, it depends on data 
+    Show selected Bubble ---
+    Comment nicely
+    Shift left bar graph in gas view ---B
+    Show current City in bar graph gas view---done
+    restore map colors when race done B
+    revert the old change in map colors B
+    move the tooltip of map B
+    label gas in line graph B
+    

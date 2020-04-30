@@ -80,13 +80,13 @@ function showlineGraph(rows){
         yaxis.append('text')
             .attr('transform','rotate(-90)')
             .attr('x',-250)
-            .attr('y',-20)
+            .attr('y',-10)
             .attr('text-anchor','end')
             .attr('stroke','blue')
             .attr('fill','black')
             .style('font-size',27)
             .style('z-index',1)
-            .text(function(){if(selected_view=="Gas View") return `concentration in ${places[city_selected]}`; else return `concentration of ${attributes[gas_selected]}`})
+            .text(function(){if(selected_view=="Gas View") return `concentration in ${places[city_selected]}`; else return `concentration of ${attributes_units[gas_selected]}`})
 
         dataNest.forEach(function(d,i){
             if(selected_time=="Daywise View")
@@ -153,7 +153,7 @@ function showlineGraph(rows){
             .attr('fill','black')
             .style('font-size',27)
             .style('z-index',1)
-            .text(function(){if(selected_view=="Gas View") return `concentration in ${places[city_selected]}`; else return `concentration of ${attributes[gas_selected]}`})
+            .text(function(){if(selected_view=="Gas View") return `concentration in ${places[city_selected]}`; else return `concentration of ${attributes_units[gas_selected]}`})
 
         dataNest.forEach(function(d,i){
             console.log(d,i);

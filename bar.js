@@ -39,7 +39,7 @@ function showBarGraphCity(data,nxt,day){
         }
         yscalebar = yscalebar.domain([0,mak[city_selected]])
         xscalebar = xscalebar.domain(attributes.map(function(d){return d}))
-        xlabel = 'gases'
+        xlabel = 'gases -> CO,SO2:ppb; NO,NO2,NOX:ppm'
         ylabel = 'concentration in '+places[city_selected];
     }
     else
@@ -63,8 +63,8 @@ function showBarGraphCity(data,nxt,day){
     else
         var xaxisbar = gbar.append('g').call(d3.axisBottom().scale(xscalebar)).attr('transform','translate(0,'+ height + ')').style('font-size',16)
     xaxisbar.append('text')
-    .attr('x',width-250)
-    .attr('y',50)
+    .attr('x',width)
+    .attr('y',70)
     .attr('text-anchor','end')
     .attr('stroke','blue')
     .attr('fill','black')
@@ -81,7 +81,7 @@ function showBarGraphCity(data,nxt,day){
     .attr('fill','black')
     .style('font-size',32)
     .style('z-index',10)
-    .text(function(){if(selected_view=="Gas View") return `concentration in ${places[city_selected]}`; else return `concentration of ${attributes[gas_selected]}`})
+    .text(function(){if(selected_view=="Gas View") return `concentration in ${places[city_selected]}`; else return `concentration of ${attributes_units[gas_selected]}`})
     }
     else{
         yscales.forEach((ele,i) => {

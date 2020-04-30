@@ -8,6 +8,7 @@ var gbar
 var mak=[]
 var makgases = []
 var attributes=['CO','NO2','NO','NOx','SO2'];
+var attributes_units=['CO (ppb)','NO2 (ppm)','NO (ppm)','NOx (ppm)','SO2 (ppb)']
 var places=['Taipei','New Taipei','Taoyuan','Hsinchu','Hsinchu City','Keelung','Yilan','Miaoli','Changhua','Nantou','Yunlin','Taichung','Chiayi','Chiayi City','Pingtung','Tainan','Kaohsiung','Hualien','Taitung','Penghu','Kinmen','Lianjiang','Tainan City','Kaohsiung City','Taichung City'];
 var city_selected=0
 var gas_selected=0 
