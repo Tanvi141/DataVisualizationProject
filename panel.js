@@ -64,12 +64,12 @@ function changeView() {
     if (ele.innerHTML == 'City View') {
         ele.innerHTML = 'Gas View'
         selected_view = "Gas View";
-        d3.selectAll('#bubble').attr('display','none');
+        // d3.selectAll('#bubble').attr('display','none');
     }
     else {
         ele.innerHTML = 'City View'
         selected_view = "City View";
-        d3.selectAll('#bubble').attr('display','block');
+        // d3.selectAll('#bubble').attr('display','block');
     }
     restartGraph();
 }

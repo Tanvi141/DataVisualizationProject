@@ -6,7 +6,7 @@ var div_map = d3.select("#map")
     .append("svg")
     .attr("width", width_map)
     .attr("height", height_map)
-    .attr("transform", "translate(" + -300 + "," + height_map / 3 + ")"); 
+    .attr("transform", "translate(" + -200 + "," + height_map / 3 + ")"); 
 
 
 function getRandomColor() {
@@ -15,6 +15,7 @@ function getRandomColor() {
     for (var i = 0; i < 6; i++) {
         color += letters[Math.floor(Math.random() * 16)];
     }
+    return 'rgb(0,'+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+')'
     return color;
 }
 
@@ -41,7 +42,7 @@ function showTimeCity(){
     // console.log(selected_time,idx_time)
 }
 function showTimeGas(){
-    if((idx_time>=23 && selected_time=="Daywise View")||(idx_time>=24 && selected_time=="Hourwise View")){
+    if((idx_time>=23 && selected_time=="Daywise View")||(idx_time>=23 && selected_time=="Hourwise View")){
         clearInterval(myVar);
     }
     else{
@@ -74,7 +75,7 @@ d3.json("http://localhost:8000/taiwan3.topo.json", function (data) {
 
     topo = topojson.feature(data, data.objects["layer1"]);
 
-    prj = d3.geoMercator().center([120.979531, 23.978567]).scale(8000);
+    prj = d3.geoMercator().center([121.079531, 23.678567]).scale(8000);
     path = d3.geoPath().projection(prj);
     console.log(topo.features)
     div_map.selectAll("path")
@@ -139,6 +140,7 @@ d3.json("http://localhost:8000/taiwan3.topo.json", function (data) {
                         selected_cities.splice(id,1)
                     }
                     else{
+                        if(selected_cities.length<5)
                         selected_cities.push(clicked)
                     }
                     showlineGraph(rows)

@@ -115,7 +115,7 @@ d3.csv("http://localhost:8000/final3.csv", function (d) {
 
 })
 $(document).ready(function(){
-    d3.selectAll('#bubble').attr('display','none');
+    // d3.selectAll('#bubble').attr('display','none');
     // myVar = setInterval("showTimeCity()",time);
     // showlineGraph(rows)
 })

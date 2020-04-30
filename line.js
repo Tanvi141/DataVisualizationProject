@@ -128,6 +128,11 @@ function showlineGraph(rows){
                     .attr("stroke", function(){console.log(d); return colorMap[places[+d.city]]})
                     .attr("stroke-width", 2)
                     .attr("fill", "none");
+            var n = d.points.length
+            console.log(d.points[0])
+            svgline.append('text')
+            .text(places[d.city])
+            .attr("transform", "translate(" + (width-40) + "," + y(d.points[n-1].val) + ")")
                 
         });
     }
@@ -142,4 +147,5 @@ function showlineGraph(rows){
         .duration(5000)
         .ease(d3.easeLinear) 
         .attr('x',width+50)
+    
 }

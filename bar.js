@@ -23,12 +23,15 @@ function showBarGraphCity(data,nxt,day){
         // console.log(element,day)
         d3.selectAll('#'+element.split(' ').join(''))
         .attr('fill','rgba(25,25,25,0.4)')
+        
     });
     }
     var yscales = []
     if(selected_view =="Gas View")
     {
-        
+        var city_name = places[city_selected]
+        d3.selectAll('#'+city_name.split(' ').join(''))
+        .attr('fill',getRandomColor())
         for(var i=0;i<attributes.length;i++)
         {
             var yscale = d3.scaleLinear().range([height,0])
@@ -55,7 +58,10 @@ function showBarGraphCity(data,nxt,day){
         xlabel = 'Cities'
         ylabel = 'Concentration'
     }
-    var xaxisbar = gbar.append('g').call(d3.axisBottom().scale(xscalebar)).attr('transform','translate(0,'+ height + ')').style('font-size',16)
+    if(selected_view=='City View')
+        var xaxisbar = gbar.append('g').call(d3.axisBottom().scale(xscalebar)).attr('transform','translate(0,'+ height + ')').style('font-size',16).selectAll('text').attr("y", 0).attr("x", 9).attr("dy", ".35em").attr('transform','rotate(90)').style("text-anchor", "start");
+    else
+        var xaxisbar = gbar.append('g').call(d3.axisBottom().scale(xscalebar)).attr('transform','translate(0,'+ height + ')').style('font-size',16)
     xaxisbar.append('text')
     .attr('x',width-250)
     .attr('y',50)
@@ -79,6 +85,7 @@ function showBarGraphCity(data,nxt,day){
     else{
         yscales.forEach((ele,i) => {
             gbar.append('g').call(d3.axisLeft().scale(ele)).style('font-size',12).attr('transform','translate('+xscalebar(attributes[i])+', 0 )')
+            gbar.append('g').call(d3.axisRight().scale(ele).tickSize(0)).style('font-size',0).attr('transform','translate('+(xscalebar(attributes[i])+xscalebar.bandwidth())+', 0 )')
         })
     }
     bars = gbar.selectAll('.bar').data(data)
