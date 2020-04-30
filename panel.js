@@ -66,9 +66,13 @@ function createPanel() {
     var brk=document.createElement("br");
     var brk2=document.createElement("br");
     var brk1=document.createElement("br");
+    var brk3=document.createElement("br");
     
     var labelsliders=document.createElement("br");
     labelsliders.id="slidersbreak"
+
+    var inst=document.createElement("p");
+    inst.innerHTML="Slide the slider to select the range of time over which values of gas shown in the graph are averaged."
 
     var selectPanel = document.getElementById('panel');
     selectPanel.appendChild(graphtext);
@@ -83,6 +87,8 @@ function createPanel() {
     selectPanel.appendChild(labelsliders)
     selectPanel.appendChild(slider1);
     selectPanel.appendChild(slider2);
+    selectPanel.appendChild(brk3);
+    selectPanel.appendChild(inst);
 }
 
 function changeView() {
