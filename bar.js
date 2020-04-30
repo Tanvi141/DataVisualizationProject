@@ -39,8 +39,8 @@ function showBarGraphCity(data,nxt,day){
         }
         yscalebar = yscalebar.domain([0,mak[city_selected]])
         xscalebar = xscalebar.domain(attributes.map(function(d){return d}))
-        xlabel = 'Gases'
-        ylabel = 'Concentration('+places[city_selected]+')'
+        xlabel = 'gases'
+        ylabel = 'concentration in '+places[city_selected];
     }
     else
     {   
@@ -55,8 +55,8 @@ function showBarGraphCity(data,nxt,day){
         }
         // console.log(qwe)
         yscalebar = yscalebar.domain([0,qwe])
-        xlabel = 'Cities'
-        ylabel = 'Concentration'
+        xlabel = 'cities'
+        ylabel = 'concentration'
     }
     if(selected_view=='City View')
         var xaxisbar = gbar.append('g').call(d3.axisBottom().scale(xscalebar)).attr('transform','translate(0,'+ height + ')').style('font-size',16).selectAll('text').attr("y", 0).attr("x", 9).attr("dy", ".35em").attr('transform','rotate(90)').style("text-anchor", "start");
@@ -81,12 +81,26 @@ function showBarGraphCity(data,nxt,day){
     .attr('fill','black')
     .style('font-size',32)
     .style('z-index',10)
-    .text(ylabel)}
+    .text(function(){if(selected_view=="Gas View") return `concentration in ${places[city_selected]}`; else return `concentration of ${attributes[gas_selected]}`})
+    }
     else{
         yscales.forEach((ele,i) => {
-            gbar.append('g').call(d3.axisLeft().scale(ele)).style('font-size',12).attr('transform','translate('+xscalebar(attributes[i])+', 0 )')
+            var al=gbar.append('g').call(d3.axisLeft().scale(ele)).style('font-size',12).attr('transform','translate('+xscalebar(attributes[i])+', 0 )')
             gbar.append('g').call(d3.axisRight().scale(ele).tickSize(0)).style('font-size',0).attr('transform','translate('+(xscalebar(attributes[i])+xscalebar.bandwidth())+', 0 )')
+            if(i==0){
+                al.append('text')
+                .attr('transform','rotate(-90)')
+                .attr('x',-150)
+                .attr('y',-50)
+                .attr('text-anchor','end')
+                .attr('stroke','blue')
+                .attr('fill','black')
+                .style('font-size',32)
+                .style('z-index',10)
+                .text(`concentration in ${places[city_selected]}`)
+            }
         })
+
     }
     bars = gbar.selectAll('.bar').data(data)
     var duplicate = data
