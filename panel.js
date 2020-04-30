@@ -265,7 +265,7 @@ function restartGraph(recalculate=1) {
     places.forEach(element => {
         // console.log(element)
     d3.selectAll('#'+element.split(' ').join(''))
-    .attr('fill',colorMap[element])}
+    .attr('fill',colorMap[element])})
     //first preprocess the data if required
     // console.log(rows)
 
