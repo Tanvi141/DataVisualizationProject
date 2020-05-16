@@ -1,6 +1,8 @@
-# Data Visualization Project
+# Data Visualization of Pollution Trends
 
 Download the code to enjoy
+
+Note: The data displayed in this visualisation may not be accurate and could show high variance from actual figures.
 
 ## Prerequisites
 
